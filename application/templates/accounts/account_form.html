@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('accounts_create') }}">
+  <input type="text" name="name" placeholder="your full name"/>
+  <input type="text" name="username" placeholder="username for login"/>
+  <input type="password" name="password" placeholder="password"/>
+  <input type="text" name="email" placeholder="(optional)"/>
+  <input type="submit" value="Create account"/>
+</form>
+{% endblock %}
