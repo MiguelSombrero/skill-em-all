@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% for account in accounts %}
+    <div
+        <p>{{ account.id }}</p>
+        <p>{{ account.name }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
