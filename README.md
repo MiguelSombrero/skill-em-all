@@ -4,15 +4,22 @@ This is a course project for University of Helsinki course [Database application
 
 ## Abstract
 
-Skill 'Em All is an application for finding right people for the projects, based on users skills.
+Skill 'Em All is an application for finding right people for the projects, based on peoples skills.
 
 ### Main features
 
-- User can create a profile
-- User can add skills to hes/her profile
+- User can create an account
+- User can view and manage profile
+- User can add skills
 - User can search other users by skill
 - User can create projects
 - User can add other users to projects he/she manages
+
+## Skill 'Em All live
+
+Latest build of this app is running on Heroku:
+
+[Skill 'Em All](https://skill-em-all.herokuapp.com/)
 
 ## Documentation
 

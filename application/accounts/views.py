@@ -1,10 +1,13 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
+from application.accounts.forms import AccountForm
 
 @app.route("/accounts/new")
 def accounts_form():
-    return render_template("accounts/account_form.html")
+    return render_template("accounts/account_form.html",
+        form = AccountForm()
+    )
 
 @app.route("/accounts/<account_id>", methods=["GET"])
 def account_profile(account_id):
@@ -20,11 +23,13 @@ def accounts_get():
 
 @app.route("/accounts", methods=["POST"])
 def accounts_create():
+    form = AccountForm(request.form)
+
     account = Account(
-        request.form.get("name"),
-        request.form.get("username"),
-        request.form.get("password"),
-        request.form.get("email")
+        form.name.data,
+        form.username.data,
+        form.password.data,
+        form.email.data
     )
 
     db.session.add(account)

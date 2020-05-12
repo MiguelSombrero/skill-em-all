@@ -2,10 +2,18 @@
   
 {% block body %}
 <form method="POST" action="{{ url_for('accounts_create') }}">
-  <input type="text" name="name" placeholder="your full name"/>
-  <input type="text" name="username" placeholder="username for login"/>
-  <input type="password" name="password" placeholder="password"/>
-  <input type="text" name="email" placeholder="(optional)"/>
+  {{ form.name.label }}
+  {{ form.name }}
+
+  {{ form.username.label }}
+  {{ form.username }}
+
+  {{ form.password.label }}
+  {{ form.password }}
+
+  {{ form.email.label }}
+  {{ form.email }}
+
   <input type="submit" value="Create account"/>
 </form>
 {% endblock %}
