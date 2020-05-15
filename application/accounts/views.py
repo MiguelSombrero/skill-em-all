@@ -25,6 +25,9 @@ def accounts_get():
 def accounts_create():
     form = AccountForm(request.form)
 
+    if not form.validate():
+        return render_template("accounts/account_form.html", form = form)
+
     account = Account(
         form.name.data,
         form.username.data,

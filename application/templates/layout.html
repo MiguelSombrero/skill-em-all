@@ -7,9 +7,13 @@
 
   <body>
     <ul>
-      <li><a href="{{ url_for('accounts_form') }}">Register</a></li>
+      {% if current_user.is_authenticated %}
       <li><a href="{{ url_for('accounts_get') }}">List employees</a></li>
       <li><a href="{{ url_for('account_profile', account_id=1) }}">Profile</a></li>
+      {% else %}
+      <li><a href="{{ url_for('login_form') }}">Login</a></li>
+      <li><a href="{{ url_for('accounts_form') }}">Register</a></li>
+      {% endif %}
     </ul>
 
     {% block body %}
