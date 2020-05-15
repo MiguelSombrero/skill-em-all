@@ -2,6 +2,7 @@ from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
 from application.accounts.forms import AccountForm
+from flask_login import login_required
 
 @app.route("/accounts/new")
 def accounts_form():
@@ -10,12 +11,14 @@ def accounts_form():
     )
 
 @app.route("/accounts/<account_id>", methods=["GET"])
+@login_required
 def account_profile(account_id):
     return render_template("accounts/account_profile.html",
         account = Account.query.get(account_id)
     )
 
 @app.route("/accounts", methods=["GET"])
+@login_required
 def accounts_get():
     return render_template("accounts/accounts.html",
         accounts = Account.query.all()

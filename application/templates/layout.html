@@ -9,7 +9,8 @@
     <ul>
       {% if current_user.is_authenticated %}
       <li><a href="{{ url_for('accounts_get') }}">List employees</a></li>
-      <li><a href="{{ url_for('account_profile', account_id=1) }}">Profile</a></li>
+      <li><a href="{{ url_for('account_profile', account_id=current_user.id) }}">Profile</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
       {% else %}
       <li><a href="{{ url_for('login_form') }}">Login</a></li>
       <li><a href="{{ url_for('accounts_form') }}">Register</a></li>
