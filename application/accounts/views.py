@@ -14,7 +14,7 @@ def accounts_form():
 @login_required
 def accounts_profile(account_id):
     account = Account.query.get(account_id)
-    form = AccountForm()
+    form = AccountForm(obj=account)
     
     return render_template("accounts/account_profile.html",
         form = form,
@@ -58,20 +58,15 @@ def accounts_update(account_id):
     form = AccountForm(request.form)
     account = Account.query.get(account_id)
 
-    if not form.validate():
-        return render_template("accounts/account_profile.html",
-            form = form,
-            account = account
-        )
+    #add validation here
 
     if not account:
         return redirect(url_for("index"))
 
-    #form.populate_obj(account)
+    if form.password.data:
+        account.password = form.password.data
 
-    print("TULTIIN TÄNNE")
     account.name = form.name.data
-    account.passwordhash = form.password.data
     account.email = form.email.data
     account.profile_info = form.profile_info.data
 

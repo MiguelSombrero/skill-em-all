@@ -19,7 +19,7 @@ def login():
             form = form
         )
 
-    account = Account.query.filter_by(username=form.username.data, passwordhash=form.password.data).first()
+    account = Account.query.filter_by(username=form.username.data, password=form.password.data).first()
 
     if not account:
         return render_template("auth/login_form.html", form = form, error = "Username or password wrong")
