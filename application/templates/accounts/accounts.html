@@ -2,9 +2,15 @@
 
 {% block body %}
     {% for account in accounts %}
-    <div
+    <div>
         <p>{{ account.id }}</p>
         <p>{{ account.name }}</p>
+        
+        {% for skill in account.skills %}
+        <div>
+            <p>{{ skill.name }}</p>
+        </div>
+        {% endfor %}
     </div>
     {% endfor %}
 {% endblock %}

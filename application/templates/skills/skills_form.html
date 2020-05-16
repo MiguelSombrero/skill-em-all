@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<h2>Your skills</h2>
+{% for skill in current_user.skills %}
+  <p>{{ skill.name }}</p>
+{% endfor%}
+
+<form method="POST" action="{{ url_for('skills_create') }}">
+  {{ form.name.label }}
+  {{ form.name }}
+
+  {% for error in form.name.errors %}
+	  <p>{{ error }}</p>
+	{% endfor %}
+
+  <input type="submit" value="Add skill"/>
+</form>
+{% endblock %}

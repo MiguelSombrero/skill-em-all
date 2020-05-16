@@ -31,6 +31,11 @@ def accounts_create():
     if not form.validate():
         return render_template("accounts/account_form.html", form = form)
 
+    account = Account.query.filter_by(username=form.username.data).first()
+
+    if account:
+        return render_template("accounts/account_form.html", form = form, error = "Username is taken, please select another one")
+
     account = Account(
         form.name.data,
         form.username.data,

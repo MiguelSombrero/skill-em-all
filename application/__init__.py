@@ -15,9 +15,12 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.close()
 
+from application import models
 from application import views
 from application.accounts import models
 from application.accounts import views
+from application.skills import models
+from application.skills import views
 from application.auth import views
 
 from os import urandom
