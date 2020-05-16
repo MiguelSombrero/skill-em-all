@@ -1,9 +1,7 @@
 from application import db
-from application.models import account_skill
+from application.models import account_skill, Base
 
-class Skill(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
+class Skill(Base):
     name = db.Column(db.String(64), nullable=False, unique=True)
     
     def __init__(self, name, account):

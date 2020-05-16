@@ -1,9 +1,7 @@
 from application import db
-from application.models import account_skill
+from application.models import account_skill, Base
 
-class Account(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
+class Account(Base):
     name = db.Column(db.String(64), nullable=False)
     username = db.Column(db.String(64), nullable=False, unique=True)
     password = db.Column(db.String(64), nullable=False)

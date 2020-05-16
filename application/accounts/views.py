@@ -43,7 +43,7 @@ def accounts_create():
     account = Account(
         form.name.data,
         form.username.data,
-        form.password.data,
+        form.password.data, #add encryption here
         form.email.data
     )
 
@@ -64,6 +64,7 @@ def accounts_update(account_id):
         return redirect(url_for("index"))
 
     if form.password.data:
+        #add encryption here
         account.password = form.password.data
 
     account.name = form.name.data
