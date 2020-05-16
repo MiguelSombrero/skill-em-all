@@ -12,7 +12,13 @@ class AccountForm(FlaskForm):
         [validators.Length(min=5, max=20, message="Password must be between 5-20 characters")]
     )
 
-    email = StringField("Email")
+    email = StringField("Email",
+        [validators.Length(max=50, message="Password must be under 50 characters")]
+    )
+
+    profile_info = StringField("Info",
+        [validators.Length(max=500, message="Profile info must be under 500 characters")]
+    )
 
     class Meta:
         csrf = False

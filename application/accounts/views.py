@@ -2,7 +2,7 @@ from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
 from application.accounts.forms import AccountForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 @app.route("/accounts/new")
 def accounts_form():
@@ -12,9 +12,13 @@ def accounts_form():
 
 @app.route("/accounts/<account_id>", methods=["GET"])
 @login_required
-def account_profile(account_id):
+def accounts_profile(account_id):
+    account = Account.query.get(account_id)
+    form = AccountForm()
+    
     return render_template("accounts/account_profile.html",
-        account = Account.query.get(account_id)
+        form = form,
+        account = account    
     )
 
 @app.route("/accounts", methods=["GET"])
@@ -47,3 +51,30 @@ def accounts_create():
     db.session.commit()
 
     return redirect(url_for("accounts_get"))
+
+@app.route("/accounts/<account_id>", methods=["POST"])
+@login_required
+def accounts_update(account_id):
+    form = AccountForm(request.form)
+    account = Account.query.get(account_id)
+
+    if not form.validate():
+        return render_template("accounts/account_profile.html",
+            form = form,
+            account = account
+        )
+
+    if not account:
+        return redirect(url_for("index"))
+
+    #form.populate_obj(account)
+
+    print("TULTIIN TÄNNE")
+    account.name = form.name.data
+    account.passwordhash = form.password.data
+    account.email = form.email.data
+    account.profile_info = form.profile_info.data
+
+    db.session.commit()
+
+    return redirect(url_for("accounts_profile", account_id=account_id))
