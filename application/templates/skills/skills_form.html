@@ -7,14 +7,16 @@
   <p>{{ skill.name }}</p>
 {% endfor%}
 
-<form method="POST" action="{{ url_for('skills_create') }}">
-  {{ form.name.label }}
-  {{ form.name }}
+<form method="POST" action="{{ url_for('skills_create') }}" class="form">
+  <div class="form-group">
+    {{ form.name.label }}
+    {{ form.name(class="form-control") }}
+  
+    {% for error in form.name.errors %}
+      <small class="form-text text-muted">{{ error }}</small>
+    {% endfor %}  
+  </div>
 
-  {% for error in form.name.errors %}
-	  <p>{{ error }}</p>
-	{% endfor %}
-
-  <input type="submit" value="Add skill"/>
+  <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add skill"/>
 </form>
 {% endblock %}

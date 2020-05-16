@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, validators
+from wtforms import StringField, TextAreaField, PasswordField, validators
 
 class AccountForm(FlaskForm):
     name = StringField("Name",
@@ -16,7 +16,7 @@ class AccountForm(FlaskForm):
         [validators.Length(max=50, message="Password must be under 50 characters")]
     )
 
-    profile_info = StringField("Info",
+    profile_info = TextAreaField("Info",
         [validators.Length(max=500, message="Profile info must be under 500 characters")]
     )
 

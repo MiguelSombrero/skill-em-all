@@ -1,3 +1,7 @@
 # Database schema
 
-![Database shema](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/skill_schema.jpg)
+## Entity relation model
+
+![Database shema](https://github.com/MiguelSombrero/skill-em-all/blob/master/documentation/skill_schema.jpg)
+
+## Create database queries
