@@ -1,50 +1,59 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>Profile of {{ account.name }} </h1>
-    <div>
-        <p>Username: {{ account.username }}</p>
-        <p>Email: {{ account.email }}</p>
-        <p>Info: {{ account.profile_info }}</p>
-    </div>
-
+<div class="row m-4">
+  <div class="col">
+    <h2>{{ account.name }} </h2>
+  </div>
+</div>
+<div class="row m-4">
+  <div class="col-12 col-md-4">
+    <h2>Account info</h2>
+    <p>Username: {{ account.username }}</p>
+    <p>Email: {{ account.email }}</p>
+    <p>Profile info: {{ account.profile_info }}</p>
+  </div>
+  <div class="col-12 col-md-8">
+    <h2 class="text-center">Update your profile</h2>
     <form method="POST" action="{{ url_for('accounts_update', account_id=current_user.id) }}" class="form">
-        <div class="form-group">
-            {{ form.name.label }}
-            {{ form.name(class="form-control") }}
-          
-            {% for error in form.name.errors %}
-              <small class="form-text text-muted">{{ error }}</small>
-            {% endfor %}  
-        </div>
-          
-        <div class="form-group">
-            {{ form.password.label }}
-            {{ form.password(class="form-control") }}
-          
-            {% for error in form.password.errors %}
-              <small class="form-text text-muted">{{ error }}</small>
-            {% endfor %}    
-        </div>
-          
-        <div class="form-group">
-            {{ form.email.label }}
-            {{ form.email(class="form-control") }}
-          
-            {% for error in form.email.errors %}
-              <small class="form-text text-muted">{{ error }}</small>
-            {% endfor %}    
-        </div>
+      <div class="form-group">
+          {{ form.name.label }}
+          {{ form.name(class="form-control") }}
         
-        <div class="form-group">
-            {{ form.profile_info.label }}
-            {{ form.profile_info(class="form-control") }}
-          
-            {% for error in form.profile_info.errors %}
-              <small class="form-text text-muted">{{ error }}</small>
-            {% endfor %}    
-        </div>
+          {% for error in form.name.errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+          {% endfor %}  
+      </div>
+        
+      <div class="form-group">
+          {{ form.password.label }}
+          {{ form.password(class="form-control") }}
+        
+          {% for error in form.password.errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+          {% endfor %}    
+      </div>
+        
+      <div class="form-group">
+          {{ form.email.label }}
+          {{ form.email(class="form-control") }}
+        
+          {% for error in form.email.errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+          {% endfor %}    
+      </div>
       
-        <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update account"/>
-      </form>
+      <div class="form-group">
+          {{ form.profile_info.label }}
+          {{ form.profile_info(class="form-control") }}
+        
+          {% for error in form.profile_info.errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+          {% endfor %}    
+      </div>
+    
+      <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update account"/>
+    </form>
+  </div>
+</div>
 {% endblock %}

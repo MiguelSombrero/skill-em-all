@@ -17,17 +17,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Skill 'Em All</a>
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('skills_form') }}">Add skills</a>
           </li>
           <li class="nav-item">
-            <a  class="nav-link" href="{{ url_for('accounts_get') }}">List employees</a>
+            <a  class="nav-link" href="{{ url_for('accounts_get') }}">Find members</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">Profile</a>
+            <a class="nav-link" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">Manage profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
@@ -43,17 +43,34 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>
     
-    <main class="container">
+    <main class="container-fluid">
       {% block body %}
-        <p>
-          Content.
-        </p>
+
       {% endblock %}
+
+      <div class="row footer">
+        <div class="col">
+          <ul class="nav justify-content-center m-4 footer">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

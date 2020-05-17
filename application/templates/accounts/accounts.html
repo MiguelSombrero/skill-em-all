@@ -1,16 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {% for account in accounts %}
-    <div>
-        <p>{{ account.id }}</p>
-        <p>{{ account.name }}</p>
-        
-        {% for skill in account.skills %}
-        <div>
-            <p>{{ skill.name }}</p>
+<div class="row m-4">
+    <div class="col">
+        {% for account in accounts %}
+        <div class="card mb-3 form">
+            <div class="card-header">
+                <h5 class="card-title">{{ account.name }}</h5>
+            </div>
+            <div class="card-body">
+                <h6>Skills:</h6>
+                <ul class="list-group list-group-flush">
+                    {% for skill in account.skills %}
+                    <li class="list-group-item">{{ skill.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         {% endfor %}
     </div>
-    {% endfor %}
+</div>
 {% endblock %}

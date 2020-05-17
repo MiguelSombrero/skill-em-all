@@ -1,22 +1,33 @@
 {% extends "layout.html" %}
   
 {% block body %}
-
-<h2>Your skills</h2>
-{% for skill in current_user.skills %}
-  <p>{{ skill.name }}</p>
-{% endfor%}
-
-<form method="POST" action="{{ url_for('skills_create') }}" class="form">
-  <div class="form-group">
-    {{ form.name.label }}
-    {{ form.name(class="form-control") }}
-  
-    {% for error in form.name.errors %}
-      <small class="form-text text-muted">{{ error }}</small>
-    {% endfor %}  
+<div class="row m-4">
+  <div class="col-12 col-md-4">
+    <h2>Your current skills</h2>
+    {% for skill in current_user.skills %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ skill.name }}</h5>
+          <p class="card-text">Experience</p>
+        </div>
+      </div>
+    {% endfor%}
+  </div>
+  <div class="col-12 col-md-8">
+    <h2 class="text-center">Add skills to your CV</h2>
+    <form method="POST" action="{{ url_for('skills_create') }}" class="form">
+      <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class="form-control", placeholder="for example 'Java' or 'Scrum'") }}
+      
+        {% for error in form.name.errors %}
+          <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}  
+      </div>
+    
+      <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add skill"/>
+    </form>
   </div>
 
-  <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add skill"/>
-</form>
+</div>
 {% endblock %}
