@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<div class="row m-4">
+  <div class="col">
+    <h2 class="text-center">Create project</h2>
+    <form method="POST" action="{{ url_for('project_create') }}" class="form">
+      <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class="form-control") }}
+      
+        {% for error in form.name.errors %}
+          <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}  
+      </div>
+
+      <div class="form-group">
+        {{ form.start_date.label }}
+        {{ form.start_date(class="form-control") }}
+      
+        {% for error in form.start_date.errors %}
+          <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}  
+      </div>
+    
+      <div class="form-group">
+        {{ form.end_date.label }}
+        {{ form.end_date(class="form-control") }}
+      
+        {% for error in form.end_date.errors %}
+          <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}  
+      </div>
+      <input type="submit" class="btn btn-dark" style="width: 100%;" value="Create"/>
+    </form>
+  </div>
+</div>
+{% endblock %}

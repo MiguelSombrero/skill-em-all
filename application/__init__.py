@@ -29,6 +29,8 @@ from application.accounts import models
 from application.accounts import views
 from application.skills import models
 from application.skills import views
+from application.projects import models
+from application.projects import views
 from application.auth import views
 
 from os import urandom
