@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-  
+{% import "forms.html" as forms %}
 {% block body %}
 
 <div class="row">
@@ -7,42 +7,12 @@
     <h2 class="text-center">Register an account</h2>
     <small>{{ error }}</small>
     <form method="POST" action="{{ url_for('accounts_create') }}" class="form">
-      <div class="form-group">
-        {{ form.name.label }}
-        {{ form.name(class="form-control") }}
+
+      {{ forms.input(form.name.label, "name", form.name.errors) }}
+      {{ forms.input(form.username.label, "username", form.username.errors) }}
+      {{ forms.input(form.password.label, "password", form.password.errors, type="password") }}
+      {{ forms.input(form.email.label, "email", form.email.errors) }}
       
-        {% for error in form.name.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}  
-      </div>
-      
-      <div class="form-group">
-        {{ form.username.label }}
-        {{ form.username(class="form-control") }}
-      
-        {% for error in form.username.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}    
-      </div>
-      
-      <div class="form-group">
-        {{ form.password.label }}
-        {{ form.password(class="form-control") }}
-      
-        {% for error in form.password.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}    
-      </div>
-      
-      <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control") }}
-      
-        {% for error in form.email.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}    
-      </div>
-    
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Create account" block />
     </form>
   </div>

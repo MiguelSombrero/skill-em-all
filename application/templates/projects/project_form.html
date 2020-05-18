@@ -1,18 +1,13 @@
 {% extends "layout.html" %}
-  
+{% import "forms.html" as forms %}
+
 {% block body %}
 <div class="row m-4">
   <div class="col">
     <h2 class="text-center">Create project</h2>
     <form method="POST" action="{{ url_for('projects_create') }}" class="form">
-      <div class="form-group">
-        {{ form.name.label }}
-        {{ form.name(class="form-control") }}
       
-        {% for error in form.name.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}  
-      </div>
+      {{ forms.input(form.name.label, "name", form.name.errors) }}
 
       <div class="form-group">
         {{ form.start_date.label }}

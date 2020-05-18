@@ -1,28 +1,15 @@
 {% extends "layout.html" %}
-  
+{% import "forms.html" as forms %}
+
 {% block body %}
 <div class="row">
   <div class="col m-4">
     <h2 class="text-center">Login</h2>
     <small>{{ error }}</small>
     <form method="POST" action="{{ url_for('login') }}" class="form">
-      <div class="form-group">
-        {{ form.username.label }}
-        {{ form.username(class="form-control") }}
-  
-        {% for error in form.username.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}    
-      </div>
-  
-      <div class="form-group">
-        {{ form.password.label }}
-        {{ form.password(class="form-control") }}
-  
-        {% for error in form.password.errors %}
-          <small class="form-text text-muted">{{ error }}</small>
-        {% endfor %}    
-      </div>
+      
+      {{ forms.input(form.username.label, "username", form.username.errors) }}
+      {{ forms.input(form.password.label, "password", form.password.errors, type="password") }}
 
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Login"/>
     </form>

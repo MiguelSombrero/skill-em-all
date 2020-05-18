@@ -26,7 +26,7 @@ class Project(Base):
             " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
             " LEFT JOIN Account ON Account.id = Account_project.account_id"
             " WHERE Project.owner_id = :owner_id"
-            " GROUP BY Project.id"
+            " GROUP BY Project.id, Account.name"
         ).params(owner_id=owner_id)
 
         res = db.engine.execute(statement)
