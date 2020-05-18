@@ -6,7 +6,7 @@ from application.models import account_skill
 from application.skills.forms import SkillForm
 from flask_login import login_required, current_user
 
-@app.route("/skills")
+@app.route("/skills/new")
 def skills_form():
     return render_template("skills/skills_form.html",
         form = SkillForm()

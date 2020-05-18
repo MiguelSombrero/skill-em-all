@@ -4,7 +4,7 @@
 <div class="row m-4">
   <div class="col">
     <h2 class="text-center">Create project</h2>
-    <form method="POST" action="{{ url_for('project_create') }}" class="form">
+    <form method="POST" action="{{ url_for('projects_create') }}" class="form">
       <div class="form-group">
         {{ form.name.label }}
         {{ form.name(class="form-control") }}

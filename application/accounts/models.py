@@ -8,8 +8,8 @@ class Account(Base):
     email = db.Column(db.String(64), nullable=True)
     profile_info = db.Column(db.String(500), nullable=True)
 
-    skills = db.relationship('Skill', secondary=account_skill, lazy='subquery',
-        backref=db.backref('account', uselist=False, lazy=False))
+    skills = db.relationship('Skill', secondary=account_skill, lazy='joined',
+        backref=db.backref('account', uselist=False, lazy=True))
 
     def __init__(self, name, username, password, email):
         self.name = name

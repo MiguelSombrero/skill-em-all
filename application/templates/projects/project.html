@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row m-4">
+  <div class="col">
+    <h2>{{ project.name }} </h2>
+  </div>
+</div>
+<div class="row m-4">
+  <div class="col-12 col-md-4">
+    <h2>Staff in this project</h2>
+    
+    {% for employee in project.staff %}
+    <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ employee.name }}</h5>
+          <h6 class="card-subtitle">Skills:</h6>
+
+          {% for skill in employee.skills %}
+          <p>{{ skill.name }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-12 col-md-8">
+    <h2 class="text-center">Add staff to this project</h2>
+
+    {% for account in accounts %}
+    <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ account.name }}</h5>
+
+          <form method="POST" action="{{ url_for('projects_add_staff', project_id=project.id, account_id=account.id) }}" class="form">
+            <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add"/>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
