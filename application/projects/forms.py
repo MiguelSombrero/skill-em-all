@@ -7,7 +7,7 @@ class ProjectForm(FlaskForm):
     )
     
     start_date = DateField("Start date", format='%d-%m-%Y')
-    end_date = DateField("Start date", format='%d-%m-%Y')
+    end_date = DateField("End date", format='%d-%m-%Y')
 
     class Meta:
         csrf = False

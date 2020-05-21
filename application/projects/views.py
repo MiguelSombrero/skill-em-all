@@ -15,11 +15,8 @@ def projects_form():
 @app.route("/projects/", methods=["GET"])
 @login_required
 def projects_my():
-    projects = Project.find_projects_by_owner(current_user.id)
-    print(projects) #take this of some point
-
     return render_template("projects/projects.html",
-        projects = projects
+        projects = Project.find_projects_by_owner(current_user.id)
     )
 
 @app.route("/projects/<project_id>", methods=["GET"])

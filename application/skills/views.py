@@ -1,6 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.skills.models import Skill
+from application.skills.models import Experience
 from application.accounts.models import Account
 from application.models import account_skill
 from application.skills.forms import SkillForm
@@ -21,12 +22,31 @@ def skills_create():
         return render_template("skills/skills_form.html", form = form)
 
     skill = Skill.query.filter_by(name=form.name.data).first()
-
+    account = Account.query.get(current_user.id)
+        
     if not skill:
-        account = Account.query.get(current_user.id)
-        skill = Skill(form.name.data, account)
-
+        skill = Skill(form.name.data)
         db.session.add(skill)
+        db.session.commit()
+
+    if not Account.user_has_skill(current_user.id, skill.id):
+        account.skills.append(skill)
+        db.session.commit()
+
+    if form.work_experience.data > 0:
+        work_experience = Experience("work_experience", form.work_experience.data)
+        work_experience.account_id = current_user.id
+        work_experience.skill_id = skill.id
+
+        db.session.add(work_experience)
+        db.session.commit()
+
+    if form.other_experience.data > 0:
+        other_experience = Experience("other_experience", form.other_experience.data)
+        other_experience.account_id = current_user.id
+        other_experience.skill_id = skill.id
+
+        db.session.add(other_experience)
         db.session.commit()
 
     return redirect(url_for("skills_form"))

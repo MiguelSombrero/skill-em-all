@@ -3,7 +3,19 @@ from application.models import account_skill, Base
 
 class Skill(Base):
     name = db.Column(db.String(64), nullable=False, unique=True)
-    
-    def __init__(self, name, account):
+    experiences = db.relationship("Experience", backref='skill', lazy=False)
+
+    def __init__(self, name):
         self.name = name
-        self.account = account
+        
+
+class Experience(Base):
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    skill_id = db.Column(db.Integer, db.ForeignKey('skill.id'), nullable=False)
+
+    experience_type = db.Column(db.String(64), nullable=False)
+    experience = db.Column(db.Integer, nullable=False)
+    
+    def __init__(self, experience_type, experience):
+        self.experience_type = experience_type
+        self.experience = experience

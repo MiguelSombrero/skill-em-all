@@ -6,6 +6,7 @@ class Project(Base):
     name = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
+    active = db.Column(db.Boolean, nullable=False)
 
     owner_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
@@ -17,6 +18,7 @@ class Project(Base):
         self.start_date = start_date
         self.end_date = end_date
         self.owner_id = owner_id
+        self.active = True
     
     @staticmethod
     def find_projects_by_owner(owner_id):

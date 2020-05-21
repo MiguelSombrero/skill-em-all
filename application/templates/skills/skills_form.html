@@ -9,7 +9,12 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">{{ skill.name }}</h5>
-          <p class="card-text">Experience</p>
+
+          <ul class="list-group list-group-flush">
+            {% for experience in skill.experiences %}
+            <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
     {% endfor%}
@@ -19,6 +24,15 @@
     <form method="POST" action="{{ url_for('skills_create') }}" class="form">
 
       {{ forms.input(form.name.label, "name", form.name.errors, placeholder="for example 'Java' or 'Scrum'") }}
+
+      <div class="row">
+        <div class="col">
+          {{ forms.input(form.work_experience.label, "work_experience", form.work_experience.errors, 0, type="number") }}
+        </div>
+        <div class="col">
+          {{ forms.input(form.other_experience.label, "other_experience", form.other_experience.errors, 0, type="number") }}
+        </div>
+      </div>
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add skill"/>
     </form>
   </div>
