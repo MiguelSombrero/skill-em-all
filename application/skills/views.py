@@ -29,9 +29,7 @@ def skills_create():
         db.session.add(skill)
         db.session.commit()
 
-    if not Account.user_has_skill(current_user.id, skill.id):
-        account.skills.append(skill)
-        db.session.commit()
+    Account.save_skill_for_user(current_user.id, skill.id)
 
     if form.work_experience.data > 0:
         work_experience = Experience("work_experience", form.work_experience.data)

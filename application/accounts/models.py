@@ -31,17 +31,12 @@ class Account(Base):
         return True
 
     @staticmethod
-    def user_has_skill(user_id, skill_id):
+    def save_skill_for_user(user_id, skill_id):
         statement = text(
-            "SELECT *"
-            " FROM Account_skill"
-            " WHERE Account_skill.account_id = :user_id"
-            " AND Account_skill.skill_id = :skill_id"
+            "INSERT INTO Account_skill (account_id, skill_id)"
+            " VALUES (:user_id, :skill_id)"
         ).params(user_id=user_id, skill_id=skill_id)
 
         res = db.engine.execute(statement)
-
-        if res == []:
-            return False
 
         return True
