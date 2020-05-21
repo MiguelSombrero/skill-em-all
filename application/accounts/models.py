@@ -1,6 +1,5 @@
 from application import db
-from application.models import account_skill, Base
-from sqlalchemy.sql import text
+from application.models import Base
 
 class Account(Base):
     name = db.Column(db.String(64), nullable=False)
@@ -9,7 +8,7 @@ class Account(Base):
     email = db.Column(db.String(64), nullable=True)
     profile_info = db.Column(db.String(500), nullable=True)
 
-    skills = db.relationship('Skill', secondary=account_skill, lazy='joined',
+    skills = db.relationship('Skill', lazy=False,
         backref=db.backref('account', uselist=False, lazy=True))
 
     def __init__(self, name, username, password, email):
@@ -28,15 +27,4 @@ class Account(Base):
         return False
 
     def is_authenticated(self):
-        return True
-
-    @staticmethod
-    def save_skill_for_user(user_id, skill_id):
-        statement = text(
-            "INSERT INTO Account_skill (account_id, skill_id)"
-            " VALUES (:user_id, :skill_id)"
-        ).params(user_id=user_id, skill_id=skill_id)
-
-        res = db.engine.execute(statement)
-
         return True
