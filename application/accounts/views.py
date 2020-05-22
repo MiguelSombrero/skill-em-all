@@ -24,8 +24,13 @@ def accounts_profile(account_id):
 @app.route("/accounts", methods=["GET"])
 @login_required
 def accounts_get():
+    skill_name = request.args.get("skill")
+
+    accounts = Account.query.join(Account.skills, aliased=True)\
+        .filter_by(name=skill_name)
+
     return render_template("accounts/accounts.html",
-        accounts = Account.query.all()
+        accounts = accounts
     )
 
 @app.route("/accounts", methods=["POST"])

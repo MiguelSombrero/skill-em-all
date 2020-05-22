@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "forms.html" as forms %}
 
 {% block body %}
 <div class="row m-4">
@@ -10,11 +11,20 @@
             </div>
             <div class="card-body">
                 <h6>Skills:</h6>
-                <ul class="list-group list-group-flush">
-                    {% for skill in account.skills %}
-                    <li class="list-group-item">{{ skill.name }}</li>
-                    {% endfor %}
-                </ul>
+                
+                {% for skill in account.skills %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ skill.name }}</h5>
+            
+                      <ul class="list-group list-group-flush">
+                        {% for experience in skill.experiences %}
+                        <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                </div>    
+                {% endfor %}
             </div>
         </div>
         {% endfor %}
