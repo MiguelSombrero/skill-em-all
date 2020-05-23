@@ -5,6 +5,7 @@ from application.skills.models import Skill
 from application.projects.models import Project
 from application.accounts.forms import AccountForm
 from flask_login import login_required, current_user
+from passlib.hash import sha256_crypt
 
 @app.route("/accounts/new")
 def accounts_form():
@@ -55,7 +56,7 @@ def accounts_create():
     account = Account(
         form.name.data,
         form.username.data,
-        form.password.data, #add encryption here
+        sha256_crypt.encrypt(form.password.data),
         form.email.data
     )
 
