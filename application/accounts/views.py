@@ -2,6 +2,7 @@ from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
 from application.skills.models import Skill
+from application.projects.models import Project
 from application.accounts.forms import AccountForm
 from flask_login import login_required, current_user
 
@@ -33,8 +34,10 @@ def accounts_get():
     else:
         accounts = Account.query.all()
 
+    projects = Project.find_project_names_by_owner(current_user.id)
+
     return render_template("accounts/accounts.html",
-        accounts = accounts
+        accounts = accounts, projects = projects
     )
 
 @app.route("/accounts", methods=["POST"])

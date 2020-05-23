@@ -23,8 +23,7 @@ def projects_my():
 @login_required
 def projects_manage(project_id):
     return render_template("projects/project.html",
-        project = Project.query.get(project_id),
-        accounts = Account.query.all()
+        project = Project.query.get(project_id)
     )
 
 @app.route("/projects", methods=["POST"])

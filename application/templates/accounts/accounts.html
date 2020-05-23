@@ -21,7 +21,20 @@
             <div class="card-body">
                 <h5 class="card-title">Add {{ account.name }} to your project</h5>
 
+                <select class="form-control" id="project_select">
+                    {% for project in projects %}
+                    <option value="{{ project.id }}" id="project_id_selection" >{{ project.name }}</option>
+                    {% endfor %}
+                </select>
 
+                <!--
+                    miten saat yllä olevasta valikosta alla olevaan url_for oikean id:n?
+                -->
+
+                <form class="my-2 my-lg-0 justify-content-center" method="POST" action="{{ url_for('projects_add_staff', project_id=1, account_id=account.id) }}" class="form">
+                    <label for="project_select">Select project</label>
+                    <input type="submit" class="btn btn-dark my-2 my-sm-0" style="width: 100%;" value="Add"/>
+                </form>
             </div>
         </div>
     </div>
