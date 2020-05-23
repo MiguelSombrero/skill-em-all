@@ -29,14 +29,20 @@ def skills_create():
         db.session.add(skill)
         db.session.commit()
 
-        if form.work_experience.data > 0:
-            work_experience = Experience("Work experience", form.work_experience.data)
+        if form.work_experience_years.data > 0 or form.work_experience_months.data:
+            work_experience = Experience("Work experience",
+                form.work_experience_years.data * 12 + form.work_experience_months.data
+            )
+
             work_experience.skill_id = skill.id
             db.session.add(work_experience)
             db.session.commit()
 
-        if form.other_experience.data > 0:
-            other_experience = Experience("Other experience", form.other_experience.data)
+        if form.other_experience_years.data > 0 or form.other_experience_months.data:
+            other_experience = Experience("Other experience",
+                form.other_experience_years.data * 12 + form.other_experience_months.data
+            )
+
             other_experience.skill_id = skill.id
             db.session.add(other_experience)
             db.session.commit()

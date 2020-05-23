@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col m-4">
     <h2 class="text-center">Login</h2>
-    <small>{{ error }}</small>
+    <p class="text-center">{{ error }}</p>
     <form method="POST" action="{{ url_for('login') }}" class="form">
       
       {{ forms.input(form.username.label, "username", form.username.errors) }}

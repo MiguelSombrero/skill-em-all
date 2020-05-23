@@ -11,17 +11,17 @@
   <div class="col-12 col-md-4">
     <h2>Account info</h2>
     <p>Username: {{ account.username }}</p>
-    <p>Email: {{ account.email }}</p>
-    <p>Profile info: {{ account.profile_info }}</p>
+    <p>Email: {{ account.email or '' }}</p>
+    <p>Profile info: {{ account.profile_info or '' }}</p>
   </div>
   <div class="col-12 col-md-8">
     <h2 class="text-center">Update your profile</h2>
     <form method="POST" action="{{ url_for('accounts_update', account_id=current_user.id) }}" class="form">
 
       {{ forms.input(form.name.label, "name", form.name.errors, form.name.data) }}
-      {{ forms.input(form.password.label, "password", form.password.errors, type="password") }}
-      {{ forms.input(form.email.label, "email", form.email.errors, form.email.data) }}
-      {{ forms.input(form.profile_info.label, "profile_info", form.profile_info.errors, form.profile_info.data) }}
+      {{ forms.input(form.password.label, "password", form.password.errors, type="password", placeholder="give new password in order to change") }}
+      {{ forms.input(form.email.label, "email", form.email.errors, form.email.data or '') }}
+      {{ forms.input(form.profile_info.label, "profile_info", form.profile_info.errors, form.profile_info.data or '' ) }}
 
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update account"/>
     </form>

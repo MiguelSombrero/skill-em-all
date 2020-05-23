@@ -77,8 +77,7 @@ def accounts_update(account_id):
         return redirect(url_for("index"))
 
     if form.password.data:
-        #add encryption here
-        account.password = form.password.data
+        account.password = sha256_crypt.encrypt(form.password.data)
 
     account.name = form.name.data
     account.email = form.email.data

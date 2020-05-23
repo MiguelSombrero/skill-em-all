@@ -21,12 +21,12 @@
     <div class="col-12 col-md-6 p-3">
         <div class="card mb-3">
             <div class="card-header">
-                <h5 class="card-title">Add {{ account.name }} to your project</h5>
+                <h5 class="card-title">Add {{ account.name }} to one of your projects</h5>
             </div>
             <div class="card-body">
                 {% for project in projects %}
                 <form class="my-2 my-lg-0 p-1 justify-content-center" method="POST" action="{{ url_for('projects_add_staff', project_id=project.id, account_id=account.id) }}" class="form">
-                    <input type="submit" class="btn btn-dark my-2 my-sm-0" style="width: 100%;" value="Add me to {{ project.name }}"/>
+                    <input type="submit" class="btn btn-dark my-2 my-sm-0" style="width: 100%;" value="{{ project.name }}"/>
                 </form>
                 {% endfor %}
             </div>

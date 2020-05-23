@@ -8,17 +8,3 @@
     {% endfor %}
   </div>
 {%- endmacro %}
-
-{% macro skill(skill) -%}
-<div class="card mb-3">
-  <div class="card-body">
-    <h5 class="card-title">{{ skill.name }}</h5>
-
-    <ul class="list-group list-group-flush">
-      {% for experience in skill.experiences %}
-      <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
-        {% endfor %}
-    </ul>
-  </div>
-</div>
-{%- endmacro %}

@@ -6,12 +6,20 @@ class SkillForm(FlaskForm):
         [validators.Length(min=1, max=50, message="Skill name must be between 2-50 characters")]
     )
 
-    work_experience = IntegerField("Work experience",
-        [validators.NumberRange(min=0, max=1000, message="experience should be between 0-1000 months")]
+    work_experience_years = IntegerField("Work experience years",
+        [validators.NumberRange(min=0, max=50, message="experience years should be between 0-50 months")]
     )
 
-    other_experience = IntegerField("Other experience",
-        [validators.NumberRange(min=0, max=1000, message="experience should be between 0-1000 months")]
+    work_experience_months = IntegerField("Work experience months",
+        [validators.NumberRange(min=0, max=1000, message="experience months should be between 0-1000 months")]
+    )
+
+    other_experience_years = IntegerField("Other experience years",
+        [validators.NumberRange(min=0, max=50, message="experience years should be between 0-50 months")]
+    )
+
+    other_experience_months = IntegerField("Other experience months",
+        [validators.NumberRange(min=0, max=1000, message="experience months should be between 0-1000 months")]
     )
 
     class Meta:

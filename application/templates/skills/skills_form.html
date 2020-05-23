@@ -26,13 +26,25 @@
       {{ forms.input(form.name.label, "name", form.name.errors, placeholder="for example 'Java' or 'Scrum'") }}
 
       <div class="row">
+        <label>Work experince</label>
         <div class="col">
-          {{ forms.input(form.work_experience.label, "work_experience", form.work_experience.errors, 0, type="number") }}
+          {{ forms.input(label="", name="work_experience_years", errors=form.work_experience_years.errors, value=0, type="number", placeholder="years") }}
         </div>
         <div class="col">
-          {{ forms.input(form.other_experience.label, "other_experience", form.other_experience.errors, 0, type="number") }}
+          {{ forms.input(label="", name="work_experience_months", errors=form.work_experience_months.errors, value=0, type="number", placeholder="months") }}
         </div>
       </div>
+
+      <div class="row">
+        <label>Other experince</label>
+        <div class="col">
+          {{ forms.input(label="", name="other_experience_years", errors=form.other_experience_years.errors, value=0, type="number", placeholder="years") }}
+        </div>
+        <div class="col">
+          {{ forms.input(label="", name="other_experience_months", errors=form.other_experience_months.errors, value=0, type="number", placeholder="months") }}
+        </div>
+      </div>
+
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Add skill"/>
     </form>
   </div>
