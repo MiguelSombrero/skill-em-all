@@ -4,30 +4,45 @@
 {% block body %}
 <div class="row m-4">
     <div class="col">
-        {% for account in accounts %}
-        <div class="card mb-3 form">
+        <form class="form-inline my-2 my-lg-0 justify-content-center" action="{{ url_for('accounts_get') }}">
+            <input class="form-control mr-sm-2" name="skill" type="search" placeholder="Search users by skill" aria-label="Search">
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+{% for account in accounts %}
+<div class="row m-4" style="background-color: red;">
+    <div class="col-12 col-md-6 p-3">
+        <div class="card mb-3">
             <div class="card-header">
-                <h5 class="card-title">{{ account.name }}</h5>
+                <h4 class="card-title">{{ account.name }}</h4>
             </div>
             <div class="card-body">
-                <h6>Skills:</h6>
-                
+                <h5 class="card-title">Add {{ account.name }} to your project</h5>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 p-3">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4 class="card-title">Skills</h4>
+            </div>
+            <div class="card-body">
                 {% for skill in account.skills %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ skill.name }}</h5>
+                    <h6 class="card-title p-2">{{ skill.name }}</h6>
             
-                      <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
                         {% for experience in skill.experiences %}
                         <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
                         {% endfor %}
-                      </ul>
-                    </div>
-                </div>    
+                    </ul>
                 {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
 </div>
+{% endfor %}
 {% endblock %}

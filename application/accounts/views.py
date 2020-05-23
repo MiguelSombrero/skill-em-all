@@ -1,6 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
+from application.skills.models import Skill
 from application.accounts.forms import AccountForm
 from flask_login import login_required, current_user
 
@@ -26,8 +27,11 @@ def accounts_profile(account_id):
 def accounts_get():
     skill_name = request.args.get("skill")
 
-    accounts = Account.query.join(Account.skills, aliased=True)\
-        .filter_by(name=skill_name)
+    if skill_name:
+        accounts = Account.query.join(Account.skills)\
+            .filter(Skill.name.like(skill_name))
+    else:
+        accounts = Account.query.all()
 
     return render_template("accounts/accounts.html",
         accounts = accounts
