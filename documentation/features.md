@@ -6,18 +6,70 @@ List of features the app is supporting
 
 ## User can create an account
 
-User can create an account by clicking the link `Register` from navigation bar. Register form opens.
+User can create an account by clicking link `Register` from the navigation bar and filling information in registration form.
 
-## User can view and manage profile
+### Queries
 
-User can view his/hers profile by clicking the link `Profile` from navigation bar. In profile page, user can manage basic info like profile text and password.
+Account is queried by username to see if username is already taken
+
+    SELECT *
+    FROM Account
+    WHERE username = 'username'
+    LIMIT 1
+
+If username is not taken, user is persisted in database
+
+    INSERT INTO Account (name, username, password, email)
+    VALUES ('name', 'username', 'password', 'email')
+
+## User can login
+
+User can login by clicking link `Login` from the navigation bar and filling username and password in login form.
+
+### Queries
+
+Account is queried by username to verify that username exists and password is correct. Query is identical to one made when creating an account.
+
+## User can logout
+
+After logged in, user can logout by clicking link `Logout` from the navigation bar.
+
+## User can view and update profile
+
+User can view his/hers profile by clicking the link `Profile` from navigation bar. In profile page, user can update name, profile info, password and email. Username cannot be changed since it's unique identifier.
+
+### Queries
+
+Account is queried by id
+
+    SELECT *
+    FROM Account
+    WHERE id = 'id
+
+Queried account is updated in the database
+
+    UPDATE Account
+    SET name = 'name', username = 'username', password = 'password', email = 'email', profile_info = 'profile_info'
+    WHERE id = 'id'
 
 ## User can add skills
 
 User can view and add his/her skills by clicking the link `Add skills` from navigation bar. 
 
+### Queries
+
 ## User can search other users by skill
+
+### Queries
 
 ## User can create projects
 
-## User can add other users to projects he/she manages
+### Queries
+
+## User can view own projects
+
+### Queries
+
+## User can add other users to projects he/she owns
+
+### Queries

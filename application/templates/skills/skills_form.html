@@ -25,23 +25,23 @@
 
       {{ forms.input(form.name.label, "name", form.name.errors, placeholder="for example 'Java' or 'Scrum'") }}
 
+      <h6>Work experience</h6>
       <div class="row">
-        <label>Work experince</label>
         <div class="col">
-          {{ forms.input(label="", name="work_experience_years", errors=form.work_experience_years.errors, value=0, type="number", placeholder="years") }}
+          {{ forms.input(label="Years", name="work_experience_years", errors=form.work_experience_years.errors, value=0, type="number", placeholder="years") }}
         </div>
         <div class="col">
-          {{ forms.input(label="", name="work_experience_months", errors=form.work_experience_months.errors, value=0, type="number", placeholder="months") }}
+          {{ forms.input(label="Months", name="work_experience_months", errors=form.work_experience_months.errors, value=0, type="number", placeholder="months") }}
         </div>
       </div>
 
+      <h6>Other experience</h6>
       <div class="row">
-        <label>Other experince</label>
         <div class="col">
-          {{ forms.input(label="", name="other_experience_years", errors=form.other_experience_years.errors, value=0, type="number", placeholder="years") }}
+          {{ forms.input(label="Years", name="other_experience_years", errors=form.other_experience_years.errors, value=0, type="number", placeholder="years") }}
         </div>
         <div class="col">
-          {{ forms.input(label="", name="other_experience_months", errors=form.other_experience_months.errors, value=0, type="number", placeholder="months") }}
+          {{ forms.input(label="Months", name="other_experience_months", errors=form.other_experience_months.errors, value=0, type="number", placeholder="months") }}
         </div>
       </div>
 

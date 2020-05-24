@@ -5,7 +5,7 @@ class Skill(Base):
     name = db.Column(db.String(64), nullable=False)
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
-    experiences = db.relationship('Experience', lazy=False,
+    experiences = db.relationship('Experience', lazy=False, cascade="all, delete-orphan",
         backref=db.backref('skill', uselist=False, lazy=True))
 
     def __init__(self, name):

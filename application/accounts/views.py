@@ -65,7 +65,7 @@ def accounts_create():
 
     return redirect(url_for("accounts_get"))
 
-@app.route("/accounts/<account_id>", methods=["POST"])
+@app.route("/accounts/<account_id>/update", methods=["POST"])
 @login_required
 def accounts_update(account_id):
     form = AccountForm(request.form)
@@ -86,3 +86,12 @@ def accounts_update(account_id):
     db.session.commit()
 
     return redirect(url_for("accounts_profile", account_id=account_id))
+
+@app.route("/accounts/<account_id>/delete", methods=["POST"])
+@login_required
+def accounts_delete(account_id):
+    account = Account.query.get(account_id)
+    db.session.delete(account)
+    db.session.commit()
+
+    return redirect(url_for("index"))

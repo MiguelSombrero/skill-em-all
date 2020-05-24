@@ -6,7 +6,7 @@ This is a course project for University of Helsinki course [Database application
 
 ## Abstract
 
-Skill 'Em All is an application for finding right people for the projects based on peoples skills. Lets say you are a manager of the project which has a requirement for people skilled with Java and React. With Skill 'Em All you can search people with those skills and find out the best people for the project.
+Skill 'Em All is an application for finding right people for the projects based on peoples skills. Lets say you are a manager of the project which has a requirement for Java and React knowledge. With Skill 'Em All you can search people with those skills and find out the best people for the project.
 
 ### Main features
 
@@ -21,7 +21,7 @@ Skill 'Em All is an application for finding right people for the projects based 
 
 Latest build of this app is running on Heroku:
 
-[Skill 'Em All](https://skill-em-all.herokuapp.com/)
+- [Skill 'Em All Heroku](https://skill-em-all.herokuapp.com/)
 
 ## Documentation
 
@@ -29,7 +29,28 @@ Latest build of this app is running on Heroku:
 
 - [Features in detail](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/features.md)
 
+- [Manual](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/manual.md)
+
+
+## Application requirements
+
+Application requires python3 to run
+
 ## Install instructions
 
-### Requirements
+Clone the project and navigate to the application folder
 
+    git clone https://github.com/MiguelSombrero/skill-em-all.git
+    cd skill-em-all
+
+Install project dependencies
+
+    pip install -r requirements.txt
+
+Run application
+
+    python run.py
+
+Application is listening address
+
+    http://localhost:5000

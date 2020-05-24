@@ -13,6 +13,10 @@
     <p>Username: {{ account.username }}</p>
     <p>Email: {{ account.email or '' }}</p>
     <p>Profile info: {{ account.profile_info or '' }}</p>
+
+    <form class="my-2 my-lg-0 p-1" method="POST" action="{{ url_for('accounts_delete', account_id=account.id) }}">
+      <input type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;" value="Delete account"/>
+  </form>
   </div>
   <div class="col-12 col-md-8">
     <h2 class="text-center">Update your profile</h2>

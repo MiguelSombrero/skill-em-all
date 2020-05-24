@@ -8,7 +8,7 @@ class Account(Base):
     email = db.Column(db.String(64), nullable=True)
     profile_info = db.Column(db.String(500), nullable=True)
 
-    skills = db.relationship('Skill', lazy=False,
+    skills = db.relationship('Skill', lazy=False, cascade="all, delete-orphan",
         backref=db.backref('account', uselist=False, lazy=True))
 
     def __init__(self, name, username, password, email):
