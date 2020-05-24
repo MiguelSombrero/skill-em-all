@@ -37,10 +37,10 @@ def projects_create():
     project = Project(
         form.name.data,
         form.start_date.data,
-        form.end_date.data,
-        current_user.id
+        form.end_date.data
     )
 
+    project.owner_id = current_user.id
     db.session.add(project)
     db.session.commit()
 

@@ -11,6 +11,9 @@ class Account(Base):
     skills = db.relationship('Skill', lazy=False, cascade="all, delete-orphan",
         backref=db.backref('account', uselist=False, lazy=True))
 
+    projects = db.relationship('Project', lazy=False, cascade="all, delete-orphan",
+        backref=db.backref('owner', uselist=False, lazy=True))
+
     def __init__(self, name, username, password, email):
         self.name = name
         self.username = username

@@ -10,14 +10,12 @@ class Project(Base):
 
     owner_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
-    staff = db.relationship('Account', secondary=account_project, lazy='joined',
-        backref=db.backref('projects', lazy=True))
+    staff = db.relationship('Account', secondary=account_project, lazy='joined')
 
-    def __init__(self, name, start_date, end_date, owner_id):
+    def __init__(self, name, start_date, end_date):
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
-        self.owner_id = owner_id
         self.active = True
     
     @staticmethod
