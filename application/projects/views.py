@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, login_manager
 from flask import render_template, request, redirect, url_for
 from application.projects.models import Project
 from application.accounts.models import Account
@@ -50,6 +50,10 @@ def projects_create():
 @login_required
 def projects_add_staff(project_id, account_id):
     project = Project.query.get(project_id)
+
+    if not project.is_owned_by(account_id):
+        return login_manager.unauthorized()
+
     account = Account.query.get(account_id)
     project.staff.append(account)
     db.session.commit()

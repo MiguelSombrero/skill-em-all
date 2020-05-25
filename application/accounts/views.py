@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, login_manager
 from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
 from application.skills.models import Skill
@@ -16,6 +16,9 @@ def accounts_form():
 @app.route("/accounts/<account_id>", methods=["GET"])
 @login_required
 def accounts_profile(account_id):
+    if not __is_owner(account_id):
+        return login_manager.unauthorized()
+
     account = Account.query.get(account_id)
     form = AccountForm(obj=account)
     
@@ -68,6 +71,9 @@ def accounts_create():
 @app.route("/accounts/<account_id>/update", methods=["POST"])
 @login_required
 def accounts_update(account_id):
+    if not __is_owner(account_id):
+        return login_manager.unauthorized()
+
     form = AccountForm(request.form)
     account = Account.query.get(account_id)
 
@@ -90,8 +96,14 @@ def accounts_update(account_id):
 @app.route("/accounts/<account_id>/delete", methods=["POST"])
 @login_required
 def accounts_delete(account_id):
+    if not __is_owner(account_id):
+        return login_manager.unauthorized()
+        
     account = Account.query.get(account_id)
     db.session.delete(account)
     db.session.commit()
 
     return redirect(url_for("index"))
+
+def __is_owner(account_id):
+    return int(account_id) == current_user.id

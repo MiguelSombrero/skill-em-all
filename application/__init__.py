@@ -23,16 +23,6 @@ else:
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
-from application import models
-from application import views
-from application.accounts import models
-from application.accounts import views
-from application.skills import models
-from application.skills import views
-from application.projects import models
-from application.projects import views
-from application.auth import views
-
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -47,6 +37,16 @@ login_manager.login_message = "Login required"
 @login_manager.user_loader
 def load_user(user_id):
     return Account.query.get(user_id)
+
+from application import models
+from application import views
+from application.accounts import models
+from application.accounts import views
+from application.skills import models
+from application.skills import views
+from application.projects import models
+from application.projects import views
+from application.auth import views
 
 try:
     db.create_all()

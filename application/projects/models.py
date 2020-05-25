@@ -1,14 +1,12 @@
 from application import db
-from application.models import account_project, Base
+from application.models import account_project, UserResource, Base
 from sqlalchemy.sql import text
 
-class Project(Base):
+class Project(Base, UserResource):
     name = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean, nullable=False)
-
-    owner_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
     staff = db.relationship('Account', secondary=account_project, lazy='joined')
 

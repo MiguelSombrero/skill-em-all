@@ -1,10 +1,9 @@
 from application import db
-from application.models import Base
+from application.models import Base, UserResource
 
-class Skill(Base):
+class Skill(Base, UserResource):
     name = db.Column(db.String(64), nullable=False)
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
-
+    
     experiences = db.relationship('Experience', lazy=False, cascade="all, delete-orphan",
         backref=db.backref('skill', uselist=False, lazy=True))
 

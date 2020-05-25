@@ -21,11 +21,11 @@ def skills_create():
     if not form.validate():
         return render_template("skills/skills_form.html", form = form)
 
-    skill = Skill.query.filter_by(name=form.name.data, account_id=current_user.id).first()
+    skill = Skill.query.filter_by(name=form.name.data, owner_id=current_user.id).first()
         
     if not skill:
         skill = Skill(form.name.data)
-        skill.account_id = current_user.id
+        skill.owner_id = current_user.id
         db.session.add(skill)
         db.session.commit()
 

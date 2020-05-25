@@ -31,3 +31,6 @@ class Account(Base):
 
     def is_authenticated(self):
         return True
+
+    def is_owner(self, user_id):
+        return self.id == user_id
