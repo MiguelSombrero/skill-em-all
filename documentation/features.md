@@ -22,6 +22,19 @@ If username is not taken, user is persisted in database
     INSERT INTO Account (name, username, password, email)
     VALUES ('name', 'username', 'password', 'email')
 
+## User can delete account
+
+User can delete account by going to her/his profile (clicking the link `Profile` from navigation bar) and clicking `Delete account` button.
+
+### Queries
+
+**Note: is this correct according to how SQLAlchemy ORM works**
+
+Account is deleted by query
+
+    DELETE FROM Account
+    WHERE id ='id'
+
 ## User can login
 
 User can login by clicking link `Login` from the navigation bar and filling username and password in login form.
@@ -58,11 +71,23 @@ User can view and add his/her skills by clicking the link `Add skills` from navi
 
 ### Queries
 
+## User can view skills
+
+### Queries
+
+## User can remove skills
+
+### Queries
+
 ## User can search other users by skill
 
 ### Queries
 
 ## User can create projects
+
+### Queries
+
+## User can delete projects
 
 ### Queries
 

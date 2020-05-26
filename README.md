@@ -38,6 +38,8 @@ Application requires python3 to run
 
 ## Install instructions
 
+### Install locally
+
 Clone the project and navigate to the application folder
 
     git clone https://github.com/MiguelSombrero/skill-em-all.git
@@ -54,3 +56,14 @@ Run application
 Application is listening address
 
     http://localhost:5000
+
+### Deploy to Heroku
+
+
+
+## TODO
+
+- exception handling in views
+- sorting accounts by experince
+- showing average experince of skills in project view
+- showing information about project in project view

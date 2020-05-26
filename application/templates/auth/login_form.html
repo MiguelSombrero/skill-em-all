@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import "forms.html" as forms %}
+{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="row">
@@ -8,8 +8,8 @@
     <p class="text-center">{{ error }}</p>
     <form method="POST" action="{{ url_for('login') }}" class="form">
       
-      {{ forms.input(form.username.label, "username", form.username.errors) }}
-      {{ forms.input(form.password.label, "password", form.password.errors, type="password") }}
+      {{ macros.input(form.username.label, "username", form.username.errors) }}
+      {{ macros.input(form.password.label, "password", form.password.errors, type="password") }}
 
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Login"/>
     </form>

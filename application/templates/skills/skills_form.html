@@ -1,47 +1,37 @@
 {% extends "layout.html" %}
-{% import "forms.html" as forms %}
+{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="row m-4">
-  <div class="col-12 col-md-4">
-    <h2>Your current skills</h2>
-    {% for skill in current_user.skills %}
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ skill.name }}</h5>
+  <div class="col-12 col-md-6 table-responsive">
+    <h2>Skills and experience</h2>
 
-          <ul class="list-group list-group-flush">
-            {% for experience in skill.experiences %}
-            <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    {% endfor%}
+    {{ macros.skill_table(current_user.skills ) }}
+
   </div>
-  <div class="col-12 col-md-8">
+  <div class="col-12 col-md-6">
     <h2 class="text-center">Add skills to your CV</h2>
     <form method="POST" action="{{ url_for('skills_create') }}" class="form">
 
-      {{ forms.input(form.name.label, "name", form.name.errors, placeholder="for example 'Java' or 'Scrum'") }}
+      {{ macros.input(form.name.label, "name", form.name.errors, placeholder="for example 'Java' or 'Scrum'") }}
 
       <h6>Work experience</h6>
       <div class="row">
         <div class="col">
-          {{ forms.input(label="Years", name="work_experience_years", errors=form.work_experience_years.errors, value=0, type="number", placeholder="years") }}
+          {{ macros.input(label="Years", name="work_experience_years", errors=form.work_experience_years.errors, value=0, type="number", placeholder="years") }}
         </div>
         <div class="col">
-          {{ forms.input(label="Months", name="work_experience_months", errors=form.work_experience_months.errors, value=0, type="number", placeholder="months") }}
+          {{ macros.input(label="Months", name="work_experience_months", errors=form.work_experience_months.errors, value=0, type="number", placeholder="months") }}
         </div>
       </div>
 
       <h6>Other experience</h6>
       <div class="row">
         <div class="col">
-          {{ forms.input(label="Years", name="other_experience_years", errors=form.other_experience_years.errors, value=0, type="number", placeholder="years") }}
+          {{ macros.input(label="Years", name="other_experience_years", errors=form.other_experience_years.errors, value=0, type="number", placeholder="years") }}
         </div>
         <div class="col">
-          {{ forms.input(label="Months", name="other_experience_months", errors=form.other_experience_months.errors, value=0, type="number", placeholder="months") }}
+          {{ macros.input(label="Months", name="other_experience_months", errors=form.other_experience_months.errors, value=0, type="number", placeholder="months") }}
         </div>
       </div>
 

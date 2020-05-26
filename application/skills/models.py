@@ -4,7 +4,8 @@ from application.models import Base, UserResource
 class Skill(Base, UserResource):
     name = db.Column(db.String(64), nullable=False)
     
-    experiences = db.relationship('Experience', lazy=False, cascade="all, delete-orphan",
+    experiences = db.relationship('Experience',
+        lazy=False, cascade="all, delete-orphan", order_by="desc(Experience.experience)",
         backref=db.backref('skill', uselist=False, lazy=True))
 
     def __init__(self, name):

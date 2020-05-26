@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import "forms.html" as forms %}
+{% import "macros.html" as macros %}
 {% block body %}
 
 <div class="row">
@@ -8,10 +8,10 @@
     <small class="text-center">{{ error }}</small>
     <form method="POST" action="{{ url_for('accounts_create') }}" class="form">
 
-      {{ forms.input(form.name.label, "name", form.name.errors) }}
-      {{ forms.input(form.username.label, "username", form.username.errors) }}
-      {{ forms.input(form.password.label, "password", form.password.errors, type="password") }}
-      {{ forms.input(form.email.label, "email", form.email.errors) }}
+      {{ macros.input(form.name.label, "name", form.name.errors) }}
+      {{ macros.input(form.username.label, "username", form.username.errors) }}
+      {{ macros.input(form.password.label, "password", form.password.errors, type="password") }}
+      {{ macros.input(form.email.label, "email", form.email.errors) }}
       
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Create account" block />
     </form>

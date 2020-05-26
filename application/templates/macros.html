@@ -1,0 +1,31 @@
+{% macro input(label, name, errors, value="", type="text", placeholder="") -%}
+  <div class="form-group">
+    <label>{{ label }}</label>
+    <input class="form-control" type="{{ type }}" value="{{ value }}" name="{{ name }}" placeholder="{{ placeholder }}" >
+    
+    {% for error in errors %}
+      <small class="form-text text-muted">{{ error }}</small>
+    {% endfor %}
+  </div>
+{%- endmacro %}
+
+{% macro skill_table(skills) -%}
+  {% for skill in skills %}
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">{{ skill.name }}</th>
+        <th scope="col">{{ skill.experiences | sum(attribute='experience') }} months</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for experience in skill.experiences %}
+      <tr>
+        <th scope="row">{{ experience.experience_type }}</th>
+        <td>{{ experience.experience }} months</td>
+      </tr>
+    {% endfor%}
+    </tbody>
+  </table>
+  {% endfor %}
+{%- endmacro %}

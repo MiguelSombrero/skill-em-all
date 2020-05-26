@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import "forms.html" as forms %}
+{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="row m-4">
@@ -37,16 +37,8 @@
             <div class="card-header">
                 <h5 class="card-title">Skills</h5>
             </div>
-            <div class="card-body">
-                {% for skill in account.skills %}
-                    <h6 class="card-title p-2">{{ skill.name }}</h6>
-            
-                    <ul class="list-group list-group-flush">
-                        {% for experience in skill.experiences %}
-                        <li class="list-group-item">{{ experience.experience_type}}, {{ experience.experience}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
+            <div class="card-body table-responsive">
+                {{ macros.skill_table(account.skills ) }}
             </div>
         </div>
     </div>
