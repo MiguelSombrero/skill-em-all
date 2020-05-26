@@ -6,8 +6,8 @@ class ProjectForm(FlaskForm):
         [validators.Length(min=2, max=50, message="Project name must be between 2-50 characters")]
     )
     
-    start_date = DateField("Start date", format='%d-%m-%Y')
-    end_date = DateField("End date", format='%d-%m-%Y')
+    start_date = DateField("Start date")
+    end_date = DateField("End date")
 
     class Meta:
         csrf = False

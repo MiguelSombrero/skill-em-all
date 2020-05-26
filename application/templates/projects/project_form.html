@@ -8,8 +8,8 @@
     <form method="POST" action="{{ url_for('projects_create') }}" class="form">
       
       {{ macros.input(form.name.label, "name", form.name.errors) }}
-      {{ macros.input(form.start_date.label, "start date", form.start_date.errors, placeholder="01-05-2020") }}
-      {{ macros.input(form.end_date.label, "end date", form.end_date.errors, placeholder="31-12-2020") }}
+      {{ macros.input(form.start_date.label, "start_date", form.start_date.errors, type="date") }}
+      {{ macros.input(form.end_date.label, "end_date", form.end_date.errors, type="date") }}
 
       <input type="submit" class="btn btn-dark" style="width: 100%;" value="Create"/>
     </form>

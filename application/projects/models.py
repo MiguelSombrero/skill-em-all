@@ -4,8 +4,8 @@ from sqlalchemy.sql import text
 
 class Project(Base, UserResource):
     name = db.Column(db.String(64), nullable=False)
-    start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.DateTime)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
     active = db.Column(db.Boolean, nullable=False)
 
     staff = db.relationship('Account', secondary=account_project, lazy='joined')
