@@ -51,7 +51,7 @@ def projects_create():
 def projects_add_staff(project_id, account_id):
     project = Project.query.get(project_id)
 
-    if not project.is_owned_by(account_id):
+    if not project.is_owned_by(current_user.id):
         return login_manager.unauthorized()
 
     account = Account.query.get(account_id)
@@ -59,3 +59,16 @@ def projects_add_staff(project_id, account_id):
     db.session.commit()
 
     return redirect(url_for("projects_manage", project_id=project_id))
+
+@app.route("/projects/<project_id>/update", methods=["POST"])
+@login_required
+def project_set_inactive(project_id):
+    project = Project.query.get(project_id)
+
+    if not project.is_owned_by(current_user.id):
+        return login_manager.unauthorized()
+
+    project.active = False
+    db.session.commit()
+
+    return redirect(url_for("projects_my"))
