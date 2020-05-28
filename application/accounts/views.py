@@ -31,6 +31,7 @@ def accounts_profile(account_id):
 @login_required
 def accounts_get():
     skill_name = request.args.get("skill")
+    experience = request.args.get("experience")
 
     if skill_name:
         accounts = Account.query.join(Account.skills)\
@@ -54,7 +55,10 @@ def accounts_create():
     account = Account.query.filter_by(username=form.username.data).first()
 
     if account:
-        return render_template("accounts/account_form.html", form = form, error = "Username is taken, please select another one")
+        return render_template("accounts/account_form.html",
+            form = form,
+            error = "Username is taken, please select another one"
+        )
 
     account = Account(
         form.name.data,

@@ -25,9 +25,11 @@
     
     {% for employee in project.staff %}
     <div class="card mb-3">
+        <div class="card-header">
+          {{ employee.name }}
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{ employee.name }}</h5>
-          <h6 class="card-subtitle">Skills:</h6>
+          <h5 class="card-title">Skills</h5>
 
           {% for skill in employee.skills %}
           <p>{{ skill.name }}</p>

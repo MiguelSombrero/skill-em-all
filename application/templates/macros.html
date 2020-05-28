@@ -29,3 +29,13 @@
   </table>
   {% endfor %}
 {%- endmacro %}
+
+{% macro banner(text) -%}
+<div class="row">
+  <div class="col text-center" style="background-color: red;">
+    <h1 class="m-4">
+      {{ text }}
+    </h1>
+  </div>
+</div>
+{%- endmacro %}

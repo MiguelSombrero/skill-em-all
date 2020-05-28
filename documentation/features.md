@@ -24,7 +24,7 @@ If username is not taken, user is persisted in database
 
 ## User can delete account
 
-User can delete account by going to her/his profile (clicking the link `Profile` from navigation bar) and clicking `Delete account` button.
+User can delete account by going to her/his profile (clicking the link `Me -> Profile` from navigation bar) and clicking `Delete account` button.
 
 ### Queries
 
@@ -49,7 +49,7 @@ After logged in, user can logout by clicking link `Logout` from the navigation b
 
 ## User can view and update profile
 
-User can view his/hers profile by clicking the link `Profile` from navigation bar. In profile page, user can update name, profile info, password and email. Username cannot be changed since it's unique identifier.
+User can view his/hers profile by clicking the link `Me -> Profile` from navigation bar. In profile page, user can update name, profile info, password and email. Username cannot be changed since it's unique identifier.
 
 ### Queries
 
@@ -67,13 +67,35 @@ Queried account is updated in the database
 
 ## User can add skills
 
-User can view and add his/her skills by clicking the link `Add skills` from navigation bar. 
+User can add skills by clicking the link `Me -> Add skills` from navigation bar. 
 
 ### Queries
+
+Application checks whether you already have skill you about to save
+
+    SELECT *
+    FROM Skill
+    WHERE name = 'name'
+    AND owner_id = 'id'
+    LIMIT 1
+
+If this query doesn't return any values, skill is saved in db
+
+    INSERT INTO Skill (name, account_id)
+    VALUES ('name', 'account_id')
+
+Also experiences related to this skill is saved to db. There can be more than one different experiences related to one skill
+
+    INSERT INTO Experience (experience_type, experience, skill_id)
+    VALUES ('type', 'experience', 'skill_id')
 
 ## User can view skills
 
+User can view skills by clicking the link `Me -> Add skills` from navigation bar. 
+
 ### Queries
+
+
 
 ## User can remove skills
 

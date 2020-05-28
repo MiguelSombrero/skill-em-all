@@ -1,21 +1,25 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block body %}
+{{ macros.banner("Skill 'Em all") }}
+
   <div class="row">
-    <div class="col text-center" style="background-color: red;">
-      <h1 class="m-4">
-        One app to skill 'Em All ...
-      </h1>
+    <div class="col text-center m-4">
+        <blockquote class="blockquote">
+          <p>One app to skill 'em all,</p>
+          <p>one app to find them.</p>
+          <p>One app to bring 'em all</p>
+          <p>and in the projects bind them.</p>
+          <footer class="blockquote-footer"><cite>Anonymous</cite></footer>
+        </blockquote>
     </div>
   </div>
   <div class="row">
-    <div class="col text-center">
-      <h3 class="m-4">
-        So, what the heck is Skill 'Em All?
-      </h3>
-      <p>
-        insert text here
-      </p>
+    <div class="col text-center m-4">
+      <h2 class="mb-4">Why Skill 'Em All?</h2>
+      <p>Find people with specific skills for your projects</p>
+      <p>Yeah, that's about it</p>
     </div>
   </div>
 {% endblock %}
