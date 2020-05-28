@@ -41,6 +41,22 @@
   <div class="col-12 col-md-6">
     <h2>Skills in this project</h2>
     
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Skill</th>
+          <th scope="col">Avg. experince</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for skill in project_skills %}
+        <tr>
+          <th scope="row">{{ skill.name }}</th>
+          <td>{{ skill.experience / project.staff|length }}</td>
+        </tr>
+      {% endfor%}
+      </tbody>
+    </table>
   </div>
 </div>
 {% endblock %}

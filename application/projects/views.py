@@ -1,6 +1,7 @@
 from application import app, db, login_manager
 from flask import render_template, request, redirect, url_for
 from application.projects.models import Project
+from application.skills.models import Skill
 from application.accounts.models import Account
 from application.projects.forms import ProjectForm
 from flask_login import login_required, current_user
@@ -22,8 +23,12 @@ def projects_my():
 @app.route("/projects/<project_id>", methods=["GET"])
 @login_required
 def projects_manage(project_id):
+    project = Project.query.get(project_id)
+    project_skills = Skill.find_skills_by_project(project_id)
+
     return render_template("projects/project.html",
-        project = Project.query.get(project_id)
+        project = project,
+        project_skills = project_skills
     )
 
 @app.route("/projects", methods=["POST"])

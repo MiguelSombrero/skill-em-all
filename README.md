@@ -64,6 +64,5 @@ Application is listening address
 ## TODO
 
 - exception handling in views
-- sorting accounts by experince
-- showing average experince of skills in project view
-- showing information about project in project view
+- information is specific person available (tied into another project or not)
+- etc etc

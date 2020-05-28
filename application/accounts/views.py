@@ -31,7 +31,6 @@ def accounts_profile(account_id):
 @login_required
 def accounts_get():
     skill_name = request.args.get("skill")
-    experience = request.args.get("experience")
 
     if skill_name:
         accounts = Account.query.join(Account.skills)\

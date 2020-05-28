@@ -55,4 +55,3 @@ class Project(Base, UserResource):
             })
 
         return response
-    
