@@ -15,7 +15,7 @@ class Skill(Base, UserResource):
     @staticmethod
     def find_skills_by_project(project_id):
         statement = text(
-            "SELECT Skill.name, SUM(Experience.experience)"
+            "SELECT Skill.name, SUM(Experience.experience), MAX(Experience.experience)"
             " FROM Account_project"
             " LEFT JOIN Account ON Account.id = Account_project.account_id"
             " LEFT JOIN Skill ON Skill.owner_id = Account.id"
@@ -30,7 +30,8 @@ class Skill(Base, UserResource):
         for row in res:
             response.append({
                 "name": row[0],
-                "experience": row[1]
+                "experience": row[1],
+                "max": row[2]
             })
 
         return response

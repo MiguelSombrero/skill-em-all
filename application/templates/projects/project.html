@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="row mt-4 mb-4">
@@ -25,34 +26,34 @@
     
     {% for employee in project.staff %}
     <div class="card mb-3">
-        <div class="card-header">
-          {{ employee.name }}
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Skills</h5>
-
-          {% for skill in employee.skills %}
-          <p>{{ skill.name }}</p>
-          {% endfor %}
-        </div>
+      <div class="card-header">
+          <h5 class="card-title">{{ employee.name }}</h5>
       </div>
+      <div class="card-body table-responsive">
+          {{ macros.skill_table(employee.skills ) }}
+      </div>
+    </div>
     {% endfor %}
   </div>
   <div class="col-12 col-md-6">
-    <h2>Skills in this project</h2>
+    <h2>Experience in project by skill</h2>
     
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Skill</th>
-          <th scope="col">Avg. experince</th>
+          <th scope="col">Sum</th>
+          <th scope="col">Average</th>
+          <th scope="col">Max</th>
         </tr>
       </thead>
       <tbody>
       {% for skill in project_skills %}
         <tr>
           <th scope="row">{{ skill.name }}</th>
+          <td>{{ skill.experience }}</td>
           <td>{{ skill.experience / project.staff|length }}</td>
+          <td>{{ skill.max }}</td>
         </tr>
       {% endfor%}
       </tbody>
