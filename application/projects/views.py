@@ -75,5 +75,4 @@ def project_set_inactive(project_id):
 
     project.active = 0
     db.session.commit()
-
     return redirect(url_for("projects_my"))
