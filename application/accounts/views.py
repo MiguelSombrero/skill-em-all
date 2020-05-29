@@ -69,7 +69,7 @@ def accounts_create():
     db.session.add(account)
     db.session.commit()
 
-    return redirect(url_for("accounts_get"))
+    return redirect(url_for("login"))
 
 @app.route("/accounts/<account_id>/update", methods=["POST"])
 @login_required

@@ -6,7 +6,7 @@ class Project(Base, UserResource):
     name = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
-    active = db.Column(db.Boolean, nullable=False)
+    active = db.Column(db.Integer, nullable=False)
 
     staff = db.relationship('Account', secondary=account_project, lazy='joined')
 
@@ -14,7 +14,7 @@ class Project(Base, UserResource):
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
-        self.active = True
+        self.active = 1
     
     @staticmethod
     def find_projects_by_owner(owner_id):
@@ -24,7 +24,7 @@ class Project(Base, UserResource):
             " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
             " LEFT JOIN Account ON Account.id = Account_project.account_id"
             " WHERE Project.owner_id = :owner_id"
-            " AND Project.active = '1'"
+            " AND Project.active = 1"
             " GROUP BY Project.id, Account.name"
         ).params(owner_id=owner_id)
 

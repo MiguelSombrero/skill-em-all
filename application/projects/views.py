@@ -73,7 +73,7 @@ def project_set_inactive(project_id):
     if not project.is_owned_by(current_user.id):
         return login_manager.unauthorized()
 
-    project.active = False
+    project.active = 0
     db.session.commit()
 
     return redirect(url_for("projects_my"))
