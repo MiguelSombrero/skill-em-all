@@ -24,7 +24,7 @@ class Project(Base, UserResource):
             " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
             " LEFT JOIN Account ON Account.id = Account_project.account_id"
             " WHERE Project.owner_id = :owner_id"
-            " AND Project.active = 1"
+            " AND Project.active = '1'"
             " GROUP BY Project.id, Account.name"
         ).params(owner_id=owner_id)
 

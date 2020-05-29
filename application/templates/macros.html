@@ -15,14 +15,14 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">{{ skill.name }}</th>
-        <th scope="col">{{ skill.experiences | sum(attribute='experience') }} months</th>
+        <th scope="col">{{ skill.experiences | sum(attribute='experience') / 12 | round }} years</th>
       </tr>
     </thead>
     <tbody>
     {% for experience in skill.experiences %}
       <tr>
         <th scope="row">{{ experience.experience_type }}</th>
-        <td>{{ experience.experience }} months</td>
+        <td>{{ (experience.experience / 12) | round }} years</td>
       </tr>
     {% endfor%}
     </tbody>
