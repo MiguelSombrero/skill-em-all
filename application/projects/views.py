@@ -25,7 +25,7 @@ def projects_my():
 def projects_manage(project_id):
     project = Project.query.get(project_id)
     project_skills = Skill.find_skills_by_project(project_id)
-
+    print(project_skills)
     return render_template("projects/project.html",
         project = project,
         project_skills = project_skills

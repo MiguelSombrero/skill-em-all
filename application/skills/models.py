@@ -21,6 +21,7 @@ class Skill(Base, UserResource):
             " LEFT JOIN Skill ON Skill.owner_id = Account.id"
             " LEFT JOIN Experience ON Experience.skill_id = Skill.id"
             " WHERE Account_project.project_id = :project_id"
+            " AND Skill.name NOT NULL"
             " GROUP BY Skill.name"
         ).params(project_id=project_id)
 

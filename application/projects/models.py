@@ -19,13 +19,13 @@ class Project(Base, UserResource):
     @staticmethod
     def find_projects_by_owner(owner_id):
         statement = text(
-            "SELECT Account.name, Project.id, Project.name, Project.start_date, Project.end_date"
+            "SELECT Project.id, Project.name, Project.start_date, Project.end_date"
             " FROM Project"
             " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
             " LEFT JOIN Account ON Account.id = Account_project.account_id"
             " WHERE Project.owner_id = :owner_id"
             " AND Project.active = 1"
-            " GROUP BY Project.id, Account.name"
+            " GROUP BY Project.id"
         ).params(owner_id=owner_id)
 
         res = db.engine.execute(statement)
