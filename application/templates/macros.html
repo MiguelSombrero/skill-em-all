@@ -9,13 +9,21 @@
   </div>
 {%- endmacro %}
 
-{% macro skill_table(skills) -%}
+{% macro skill_table(skills, current_user) -%}
   {% for skill in skills %}
   <table class="table table-hover">
     <thead class="thead-dark">
       <tr>
         <th scope="col">{{ skill.name }}</th>
         <th scope="col">{{ skill.experiences | sum(attribute='experience') / 12 | round }} years</th>
+
+        {% if skill.owner_id == current_user.id %}
+        <th>
+          <form method="POST" action="{{ url_for('skills_delete', skill_id=skill.id) }}">
+            <input type="submit" class="btn btn-danger" style="width: 100%;" value="Delete skill"/>
+          </form>
+        </th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>

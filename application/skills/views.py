@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, login_manager
 from flask import render_template, request, redirect, url_for
 from application.skills.models import Skill
 from application.skills.models import Experience
@@ -46,5 +46,18 @@ def skills_create():
             other_experience.skill_id = skill.id
             db.session.add(other_experience)
             db.session.commit()
+
+    return redirect(url_for("skills_form"))
+
+@app.route("/skills/<skill_id>/delete", methods=["POST"])
+@login_required
+def skills_delete(skill_id):
+    skill = Skill.query.get(skill_id)
+
+    if not skill.is_owned_by(current_user.id):
+        return login_manager.unauthorized()
+    
+    db.session.delete(skill)
+    db.session.commit()
 
     return redirect(url_for("skills_form"))
