@@ -37,7 +37,7 @@
               Me
             </a>
             <div class="dropdown-menu" aria-labelledby="meDropdown">
-              <a class="dropdown-item" href="{{ url_for('skills_form') }}">Add skills</a>
+              <a class="dropdown-item" href="{{ url_for('skills_form') }}">Skills</a>
               <a class="dropdown-item" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">Profile</a>
             </div>
           </li>
@@ -54,7 +54,7 @@
           {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{ url_for('accounts_get') }}">
-          <input class="form-control mr-sm-2" name="skill" type="search" placeholder="Search users by skill" aria-label="Search">
+          <input class="form-control mr-sm-2" name="skill" type="search" placeholder="Search people by skill" aria-label="Search">
           <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
