@@ -1,7 +1,7 @@
 {% macro input(label, name, errors, value="", type="text", placeholder="") -%}
   <div class="form-group">
-    <label>{{ label }}</label>
-    <input class="form-control" type="{{ type }}" value="{{ value }}" name="{{ name }}" placeholder="{{ placeholder }}" >
+    <label for="{{ name }}">{{ label }}</label>
+    <input id="{{ name }}" class="form-control" type="{{ type }}" value="{{ value }}" name="{{ name }}" placeholder="{{ placeholder }}" >
     
     {% for error in errors %}
       <small class="form-text text-muted">{{ error }}</small>
@@ -11,11 +11,12 @@
 
 {% macro skill_table(skills, current_user) -%}
   {% for skill in skills %}
+  {% set sum  = skill.experiences | sum(attribute='experience') / 12 %}
   <table class="table table-hover">
     <thead class="thead-dark">
       <tr>
         <th scope="col">{{ skill.name }}</th>
-        <th scope="col">{{ skill.experiences | sum(attribute='experience') / 12 | round }} years</th>
+        <th scope="col">{{ sum | round(1) }} years</th>
 
         {% if skill.owner_id == current_user.id %}
         <th>
@@ -30,7 +31,7 @@
     {% for experience in skill.experiences %}
       <tr>
         <th scope="row">{{ experience.experience_type }}</th>
-        <td>{{ (experience.experience / 12) | round }} years</td>
+        <td>{{ (experience.experience / 12) | round(1) }} years</td>
       </tr>
     {% endfor%}
     </tbody>

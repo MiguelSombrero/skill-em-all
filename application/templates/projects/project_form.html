@@ -2,9 +2,11 @@
 {% import "macros.html" as macros %}
 
 {% block body %}
+
+{{ macros.banner("Create project") }}
+
 <div class="row m-4">
   <div class="col">
-    <h2 class="text-center">Create project</h2>
     <form method="POST" action="{{ url_for('projects_create') }}" class="form">
       
       {{ macros.input(form.name.label, "name", form.name.errors) }}

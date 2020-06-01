@@ -5,24 +5,20 @@
 {{ macros.banner(project.name) }}
 
 <div class="row m-4">
-  <div class="col-12 col-md-3">
-    <p class="text-muted">Start time: {{ project.start_date }}</p>
-  </div>
-  <div class="col-12 col-md-3">
-    <p class="text-muted">End time: {{ project.end_date }}</p>
-  </div>
-  <div class="col-12 col-md-3">
+  <div class="col-12 col-md-6">
+    <p class="text-muted">Started: {{ project.start_date.strftime('%d.%m.%Y') }}</p>
+    <p class="text-muted">End time: {{ project.end_date.strftime('%d.%m.%Y') }}</p>
     <p class="text-muted">Staff: {{ project.staff|length }}</p>
   </div>
-  <div class="col-12 col-md-3">
-    <form class="my-2 my-lg-0 p-1" method="POST" action="{{ url_for('project_set_inactive', project_id=project.id) }}">
-      <input type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;" value="Close project"/>
+  <div class="col-12 col-md-6">
+    <form method="POST" action="{{ url_for('project_set_inactive', project_id=project.id) }}">
+      <input type="submit" class="btn btn-danger" style="float: right;" value="Close project"/>
     </form>
   </div>
 </div>
 <div class="row m-4">
   <div class="col-12 col-md-6">
-    <h4>Staff in this project</h4>
+    <h4>Staff in project</h4>
     
     {% for employee in project.staff %}
     <div class="card mb-3">
@@ -36,7 +32,7 @@
     {% endfor %}
   </div>
   <div class="col-12 col-md-6 table-responsive">
-    <h4>Experience in project by skill</h4>
+    <h4>Experience in project</h4>
 
     <table class="table table-hover">
       <thead class="thead-dark">
@@ -44,16 +40,14 @@
           <th scope="col">Skill</th>
           <th scope="col">Sum</th>
           <th scope="col">Average</th>
-          <th scope="col">Max</th>
         </tr>
       </thead>
       <tbody>
       {% for skill in project_skills %}
         <tr>
           <th scope="row">{{ skill.name }}</th>
-          <td>{{ skill.experience / 12 }}</td>
-          <td>{{ skill.experience / project.staff|length / 12 }}</td>
-          <td>{{ skill.max / 12 }}</td>
+          <td>{{ (skill.experience / 12) | round(1) }}</td>
+          <td>{{ (skill.experience / project.staff|length / 12) | round(1) }}</td>
         </tr>
       {% endfor%}
       </tbody>

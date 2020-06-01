@@ -87,6 +87,6 @@ Commit and push your changes to heroku
 - information if specific person is available (tied into another project or not)
 - possibility to update experience without deleting and adding skill
 - Add more information in My projects view
-- correct rounding for experiences in skills
-- Do not show 
+    - To add information about staff, you need to modify find_projects_by_owner() query in Project model
+- In Find people view, do not show add project buttons which user already in
 - ... and lots of minor bug fixes and betterments

@@ -1,19 +1,26 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block body %}
-<div class="row m-4">
-  <div class="col form">
-    <h2>My projects</h2>
-    
-    {% for project in projects %}
-    <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ project.name }}</h5>
 
-          <a href="{{ url_for('projects_manage', project_id=project.id) }}">Manage project -></a>
+{{ macros.banner("My projects") }}
+
+<div class="row m-4">
+  <div class="col">
+    {% for project in projects if project %}
+    <div class="card mb-3">
+        <div class="card-header">
+          <h2 class="card-title">{{ project.name }}</h2>
+        </div>
+        <div class="card-body">
+            <a href="{{ url_for('projects_manage', project_id=project.id) }}">Manage project -></a>
         </div>
       </div>
     {% endfor %}
+
+    {% if projects | length == 0 %}
+      <h4 class="text-center">No projects to show</h4>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

@@ -23,22 +23,19 @@
           <li class="nav-item">
             <a  class="nav-link" href="{{ url_for('accounts_get') }}">Find people</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Projects
-            </a>
-            <div class="dropdown-menu" aria-labelledby="projectsDropdown">
-              <a class="dropdown-item" href="{{ url_for('projects_form') }}">Create project</a>
-              <a class="dropdown-item" href="{{ url_for('projects_my') }}">My projects</a>
-            </div>
+          <li class="nav-item">
+            <a  class="nav-link" href="{{ url_for('skills_form') }}">Add skills</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="{{ url_for('projects_form') }}">Create project</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="meDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Me
             </a>
             <div class="dropdown-menu" aria-labelledby="meDropdown">
-              <a class="dropdown-item" href="{{ url_for('skills_form') }}">Skills</a>
-              <a class="dropdown-item" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">Profile</a>
+              <a class="dropdown-item" href="{{ url_for('projects_my') }}">My projects</a>
+              <a class="dropdown-item" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">My Profile</a>
             </div>
           </li>
           <li class="nav-item">

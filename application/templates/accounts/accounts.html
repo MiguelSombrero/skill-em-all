@@ -2,6 +2,9 @@
 {% import "macros.html" as macros %}
 
 {% block body %}
+
+{{ macros.banner("Search people by their skill") }}
+
 <div class="row m-4">
     <div class="col">
         <form class="form-inline my-2 my-lg-0 justify-content-center" action="{{ url_for('accounts_get') }}">
@@ -11,10 +14,18 @@
     </div>
 </div>
 
+{% if search_term %}
+<div class="row m-4">
+    <div class="col text-center">
+        <h2>results for search: '{{ search_term }}'</h2>
+    </div>
+</div>
+{% endif %}
+
 {% for account in accounts %}
 <div class="row">
     <div class="col">
-        <h2 style="width: 100%; text-align: center;">{{ account.name }}</h2>
+        <h3 style="width: 100%; text-align: center;">{{ account.name }}</h3>
     </div>
 </div>
 <div class="row m-4" style="background-color: red;">

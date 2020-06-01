@@ -41,7 +41,9 @@ def accounts_get():
     projects = Project.find_project_names_by_owner(current_user.id)
 
     return render_template("accounts/accounts.html",
-        accounts = accounts, projects = projects
+        accounts = accounts,
+        projects = projects,
+        search_term = skill_name
     )
 
 @app.route("/accounts", methods=["POST"])

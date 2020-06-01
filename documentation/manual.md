@@ -14,25 +14,25 @@ After user is logged in, user can logout by clicking link `Logout` from the navi
 
 ## View, update or delete profile
 
-User can view his/hers profile by clicking the link `Me -> Profile` from navigation bar. In profile page, user can update name, profile info, password and email. If password is not given, application won't update password. Username cannot be changed.
+User can view his/hers profile by clicking the link `Me -> My Profile` from navigation bar. In profile page, user can update name, profile info, password and email. If password is not given, application won't update password. Username cannot be changed.
 
 User can delete account clicking `Delete account` button. This will also delete all skills and projects related to that profile.
 
 ## View, add and delete skills
 
-User can view, add and delete skills by clicking the link `Me -> Skills` from navigation bar and filling skill form. Skill can be any skill or knowledge, which you would use in your CV - for example 'Python' or 'Agile methods'. 
+User can view, add and delete skills by clicking the link `Add skills` from navigation bar and filling skill form. Skill can be any skill or knowledge, which you would use in your CV - for example 'Python' or 'Agile methods'. 
 
 ## Create project
 
-User can create projects by clicking the link `Projects -> Create project` from navigation bar and filling project form. After succesfully creating a project, user is redirected to projects page.
+User can create projects by clicking the link `Create project` from navigation bar and filling project form. After succesfully creating a project, user is redirected to projects page.
 
 ## View projects
 
-User can view projects by clicking the link `Projects -> My projects` from navigation bar. Projects page shows current users all *active* projects (e.g. projects which is not closed).
+User can view projects by clicking the link `Me -> My projects` from navigation bar. Projects page shows current users all *active* projects (e.g. projects which is not closed).
 
 ## View and close project
 
-User can view project by going projects page (clicking the link `Projects -> My projects` from navigation bar) and selecting a project (Manage project link). Project page shows basic information about the project, including people already attached to this project, and summary about skills and experiences in this project.
+User can view project by going projects page (clicking the link `Me -> My projects` from navigation bar) and selecting a project (Manage project link). Project page shows basic information about the project, including people already attached to this project, and summary about skills and experiences in this project.
 
 User can close project by clicking `Close project`button. *This does not delete project* from the database, it only sets the `Project.active` attribute to false.
 
