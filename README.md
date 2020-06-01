@@ -14,8 +14,8 @@ Skill 'Em All is an application for finding right people for the projects based 
 - User can view and manage profile
 - User can add/remove skills
 - User can search other users by skill
-- User can create projects
-- User can add other users to projects he/she manages
+- User can create/close projects
+- User can add other users to her/his projects
 
 ## Skill 'Em All live
 
@@ -27,7 +27,7 @@ Latest build of this app is running on Heroku:
 
 - [Database shema](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/schema.md)
 
-- [Features in detail](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/features.md)
+- [User stories and queries](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/features.md)
 
 - [Manual](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/manual.md)
 
@@ -36,9 +36,7 @@ Latest build of this app is running on Heroku:
 
 Application requires python3 to run
 
-## Install instructions
-
-### Install locally
+## Install and run application locally
 
 Clone the project and navigate to the application folder
 
@@ -57,12 +55,38 @@ Application is listening address
 
     http://localhost:5000
 
-### Deploy to Heroku
+## Deploy app to Heroku
 
+You need to have [Heroku account](https://www.heroku.com/) account and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) in order to deploy app to heroku with these instructions.
 
+When in application root folder, create heroku app:
+
+    heroku create <name-of-your-application>
+
+Add heroku remote to your local git repository
+
+    git remote add heroku <address-in-heroku-of-your-application>
+
+Add required environment variables to Heroku
+
+    heroku config:set HEROKU=1
+
+Add Postgres database to your Heroku application
+
+    heroku addons:add heroku-postgresql:hobby-dev
+
+Commit and push your changes to heroku
+
+    git add .
+    git commit -m "deploy to Heroku"
+    git push heroku master
 
 ## TODO
 
 - exception handling in views
-- information is specific person available (tied into another project or not)
-- etc etc
+- information if specific person is available (tied into another project or not)
+- possibility to update experience without deleting and adding skill
+- Add more information in My projects view
+- correct rounding for experiences in skills
+- Do not show 
+- ... and lots of minor bug fixes and betterments

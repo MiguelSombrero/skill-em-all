@@ -1,5 +1,6 @@
 from application import db
 from application.models import Base
+from sqlalchemy.sql import text
 
 class Account(Base):
     name = db.Column(db.String(64), nullable=False)
@@ -11,7 +12,7 @@ class Account(Base):
     skills = db.relationship('Skill', lazy=False, cascade="all, delete-orphan",
         backref=db.backref('account', uselist=False, lazy=True))
 
-    projects = db.relationship('Project', lazy=False, cascade="all, delete-orphan",
+    projects = db.relationship('Project', lazy=True, cascade="all, delete-orphan",
         backref=db.backref('owner', uselist=False, lazy=True))
 
     def __init__(self, name, username, password, email):

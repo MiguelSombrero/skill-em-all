@@ -1,4 +1,4 @@
-# Features
+# User stories and queries
 
 ## User can create an account
 
@@ -20,12 +20,21 @@ If username is not taken, user is persisted in database
 
 ### Queries
 
-**Note: is this correct according to how SQLAlchemy ORM works**
-
 Account is deleted by query
 
     DELETE FROM Account
     WHERE id ='id'
+
+And all the related data with cascading deletes
+
+    DELETE FROM Project
+    WHERE Project.id = ?
+
+    DELETE FROM Skill
+    WHERE Skill.id = ?
+    
+    DELETE FROM Experience
+    WHERE Experience.id = ?
 
 ## User can login
 
@@ -77,28 +86,90 @@ Also experiences related to this skill is saved to db. There can be more than on
 
 ### Queries
 
+Account object is implicitly called with skills and experiences, when user loads skills page
 
+    SELECT *
+    FROM Account
+    LEFT JOIN Skill ON Skill.owner_id = Account.id
+    LEFT JOIN Experience ON Experience.skill_id = Skill.id
+    WHERE Account.id = 'id'
+    ORDER BY Experience.experience DESC
 
 ## User can remove skills
 
 ### Queries
 
+First skill is queried by id in order to check whether it is owned by logged user
+
+    SELECT *
+    FROM Skill
+    LEFT JOIN Experience ON Experience.skill_id = Skill.id
+    WHERE Skill.id = 'id'
+    ORDER BY Experience.experience DESC
+
+If so, Skill and related experiences is deleted from db
+
+    DELETE FROM skill
+    WHERE skill.id = ?
+    
+    DELETE FROM experience
+    WHERE experience.id = ?
+    
 ## User can search other users by skill
 
+When user searches other users, two queries are being made
+
 ### Queries
+
+Current users active projects are fetched
+
+    SELECT Project.id, Project.name
+    FROM Project
+    WHERE Project.owner_id = 'id'
+    AND Project.active = 1
+
+
+Accounts are fetched by skill name
+
+    SELECT *
+    FROM Account
+    LEFT JOIN Skill ON Skill.owner_id = Account.id
+    LEFT JOIN Experience ON Experience.skill_id = Skill.id
+    WHERE Skill.name LIKE 'name'
+    ORDER BY Experience.experience DESC
 
 ## User can create projects
 
 ### Queries
 
-## User can delete projects
+    INSERT INTO Project (name, start_date, end_date, owner_id)
+    VALUES ('name', 'start_date', 'end_date', 'owner_id')
+
+## User can close projects
 
 ### Queries
+
+    UPDATE Project
+    SET active = FALSE
+    WHERE Project.id = 'id'
 
 ## User can view own projects
 
 ### Queries
 
+    SELECT Project.id, Project.name, Project.start_date, Project.end_date
+    FROM Project
+    LEFT JOIN Account_project ON Project.id = Account_project.project_id
+    LEFT JOIN Account ON Account.id = Account_project.account_id
+    WHERE Project.owner_id = 'id'
+    AND Project.active = 1
+    GROUP BY Project.id
+
 ## User can add other users to projects he/she owns
 
 ### Queries
+
+Project is queried by id in order to check whether it is owned by logged user. If so, project id and account is is inserted into join table
+
+    INSERT INTO account_project (account_id, project_id)
+    VALUES ('account_id', 'project_id')

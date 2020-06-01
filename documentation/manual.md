@@ -42,4 +42,4 @@ User can search other users by clicking link `Find people` from the navigation b
 
 ## Add users to projects
 
-
+User can add other users to his/hers projects form `Find people` view, by clicking button with projects name, in left side column. After succesfull addition, user is redirected to project page.

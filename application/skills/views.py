@@ -9,8 +9,11 @@ from flask_login import login_required, current_user
 @app.route("/skills/new")
 @login_required
 def skills_form():
+    user = Account.query.get(current_user.id)
+
     return render_template("skills/skills_form.html",
-        form = SkillForm()
+        form = SkillForm(),
+        user = user
     )
 
 @app.route("/skills", methods=["POST"])

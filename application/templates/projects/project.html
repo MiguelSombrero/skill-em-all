@@ -30,12 +30,12 @@
           <h5 class="card-title">{{ employee.name }}</h5>
       </div>
       <div class="card-body table-responsive">
-          {{ macros.skill_table(employee.skills ) }}
+          {{ macros.skill_table(employee.skills, current_user) }}
       </div>
     </div>
     {% endfor %}
   </div>
-  <div class="col-12 col-md-6">
+  <div class="col-12 col-md-6 table-responsive">
     <h4>Experience in project by skill</h4>
 
     <table class="table table-hover">
