@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col m-4">
     <h2 class="text-center">Login</h2>
-    <p class="text-center">{{ error }}</p>
+    <p class="text-center" style="color: red;">{{ error }}</p>
     <form method="POST" action="{{ url_for('login') }}" class="form">
       
       {{ macros.input(form.username.label, "username", form.username.errors) }}

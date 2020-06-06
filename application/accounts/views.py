@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, url_for
 from application.accounts.models import Account
 from application.skills.models import Skill
 from application.projects.models import Project
-from application.accounts.forms import AccountForm
+from application.accounts.forms import AccountForm, AccountProfileForm
 from flask_login import login_required, current_user
 from passlib.hash import sha256_crypt
 
@@ -79,10 +79,14 @@ def accounts_update(account_id):
     if not __is_owner(account_id):
         return login_manager.unauthorized()
 
-    form = AccountForm(request.form)
+    form = AccountProfileForm(request.form)
     account = Account.query.get(account_id)
 
-    #add validation here
+    if not form.validate():
+        return render_template("accounts/account_profile.html",
+            form = form,
+            account = account
+        )
 
     if not account:
         return redirect(url_for("index"))

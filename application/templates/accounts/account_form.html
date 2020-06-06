@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col m-4">
     <h2 class="text-center">Register an account</h2>
-    <small class="text-center">{{ error }}</small>
+    <p class="text-center" style="color: red;">{{ error }}</p>
     <form method="POST" action="{{ url_for('accounts_create') }}" class="form">
 
       {{ macros.input(form.name.label, "name", form.name.errors) }}

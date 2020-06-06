@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, validators
+from wtforms import StringField, IntegerField, validators, ValidationError
 
 class SkillForm(FlaskForm):
     name = StringField("Name of the skill",
-        [validators.Length(min=1, max=50, message="Skill name must be between 2-50 characters")]
+        [validators.Length(min=1, max=50, message="Skill name must be between 2-50 characters"),
+        validators.DataRequired()]
     )
 
     work_experience_years = IntegerField("Work experience years",

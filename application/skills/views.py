@@ -9,11 +9,8 @@ from flask_login import login_required, current_user
 @app.route("/skills/new")
 @login_required
 def skills_form():
-    user = Account.query.get(current_user.id)
-
     return render_template("skills/skills_form.html",
-        form = SkillForm(),
-        user = user
+        form = SkillForm()
     )
 
 @app.route("/skills", methods=["POST"])
@@ -23,6 +20,10 @@ def skills_create():
 
     if not form.validate():
         return render_template("skills/skills_form.html", form = form)
+
+    if not __validate_experience(form):
+        return render_template("skills/skills_form.html", form = form,
+            error = "You must give an experience to skill")
 
     skill = Skill.query.filter_by(name=form.name.data, owner_id=current_user.id).first()
         
@@ -64,3 +65,12 @@ def skills_delete(skill_id):
     db.session.commit()
 
     return redirect(url_for("skills_form"))
+
+def __validate_experience(form):
+    if form.work_experience_years.data == 0 and \
+        form.work_experience_months.data == 0 and \
+        form.other_experience_years.data == 0 and \
+        form.other_experience_months.data == 0:
+        return False
+    
+    return True
