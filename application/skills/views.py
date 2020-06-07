@@ -13,6 +13,16 @@ def skills_form():
         form = SkillForm()
     )
 
+@app.route("/skills", methods=["GET"])
+@login_required
+def skills_my():
+    skills = Skill.query.filter_by(owner_id=current_user.id)
+
+    return render_template("skills/skills.html",
+        form = SkillForm(),
+        skills = skills
+    )
+
 @app.route("/skills", methods=["POST"])
 @login_required
 def skills_create():
@@ -52,6 +62,43 @@ def skills_create():
             db.session.commit()
 
     return redirect(url_for("skills_form"))
+
+@app.route("/skills/<skill_id>/update", methods=["POST"])
+@login_required
+def skills_update(skill_id):
+    skill = Skill.query.get(skill_id)
+
+    if not skill.is_owned_by(current_user.id):
+        return login_manager.unauthorized()
+    
+    form = SkillForm(request.form)
+
+    if not form.validate():
+        return render_template("skills/skills.html", form = form)
+
+    if not __validate_experience(form):
+        return render_template("skills/skills.html", form = form,
+            error = "You must give an experience to skill")
+
+    if form.work_experience_years.data > 0 or form.work_experience_months.data:
+        work_experience = Experience("Work experience",
+            form.work_experience_years.data * 12 + form.work_experience_months.data
+        )
+
+        work_experience.skill_id = skill.id
+        db.session.add(work_experience)
+        db.session.commit()
+
+    if form.other_experience_years.data > 0 or form.other_experience_months.data:
+        other_experience = Experience("Other experience",
+            form.other_experience_years.data * 12 + form.other_experience_months.data
+        )
+
+        other_experience.skill_id = skill.id
+        db.session.add(other_experience)
+        db.session.commit() 
+
+    return redirect(url_for("skills_my"))
 
 @app.route("/skills/<skill_id>/delete", methods=["POST"])
 @login_required

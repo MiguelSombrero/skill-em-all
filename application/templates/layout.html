@@ -34,6 +34,7 @@
               Me
             </a>
             <div class="dropdown-menu" aria-labelledby="meDropdown">
+              <a class="dropdown-item" href="{{ url_for('skills_my') }}">My skills</a>
               <a class="dropdown-item" href="{{ url_for('projects_my') }}">My projects</a>
               <a class="dropdown-item" href="{{ url_for('accounts_profile', account_id=current_user.id) }}">My Profile</a>
             </div>
