@@ -81,21 +81,19 @@ def skills_update(skill_id):
             error = "You must give an experience to skill")
 
     if form.work_experience_years.data > 0 or form.work_experience_months.data:
-        work_experience = Experience("Work experience",
-            form.work_experience_years.data * 12 + form.work_experience_months.data
-        )
+        experience = Experience.query\
+            .filter_by(skill_id=skill_id, experience_type="Work experience")\
+            .first()
 
-        work_experience.skill_id = skill.id
-        db.session.add(work_experience)
+        experience.experience = form.work_experience_years.data * 12 + form.work_experience_months.data
         db.session.commit()
 
     if form.other_experience_years.data > 0 or form.other_experience_months.data:
-        other_experience = Experience("Other experience",
-            form.other_experience_years.data * 12 + form.other_experience_months.data
-        )
-
-        other_experience.skill_id = skill.id
-        db.session.add(other_experience)
+        experience = Experience.query\
+            .filter_by(skill_id=skill_id, experience_type="Other experience")\
+            .first()
+        
+        experience.experience = form.other_experience_years.data * 12 + form.other_experience_months.data
         db.session.commit() 
 
     return redirect(url_for("skills_my"))

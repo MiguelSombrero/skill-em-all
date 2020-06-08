@@ -3,7 +3,7 @@
 
 {% block body %}
 
-{{ macros.banner("Your skills") }}
+{{ macros.banner("My skills") }}
 
 <div class="row m-4">
   <div class="col form">
@@ -11,19 +11,37 @@
     <p class="text-center" style="color: red;">{{ error }}</p>
     <form method="POST" action="{{ url_for('skills_update', skill_id=skill.id) }}" class="form">
 
-        <h3>{{ skill.name }}</h3>
+        <h3 class="mb-4" style="color: red;">{{ skill.name }}</h3>
+        <input type="hidden" value="{{ skill.name }}" name="name" >
 
         {% for experience in skill.experiences %}
-        <h6>{{ experience.experience_type }}</h6>
-        <div class="row">
+          {% set years = (experience.experience / 12) | int %}
+          {% set months = experience.experience % 12 %}
+
+          {% if experience.experience_type == "Work experience" %}
+          <h6>Work experience</h6>
+          <div class="row">
             <div class="col">
-                {{ macros.input(label="Years", name="experience.experience_type + _years", errors=form.work_experience_years.errors, value=(experience.experience / 12) | int, type="number", placeholder="years") }}
+              {{ macros.input(label="Years", name="work_experience_years", errors=form.work_experience_years.errors, value=years, type="number", placeholder="years") }}
             </div>
             <div class="col">
-                {{ macros.input(label="Months", name="experience.experience_type + _months", errors=form.work_experience_months.errors, value=(experience.experience % 12), type="number", placeholder="months") }}
+              {{ macros.input(label="Months", name="work_experience_months", errors=form.work_experience_months.errors, value=months, type="number", placeholder="months") }}
             </div>
-        </div>
+          </div>
+          {% else %}
+          <h6>Other experience</h6>
+          <div class="row">
+            <div class="col">
+              {{ macros.input(label="Years", name="other_experience_years", errors=form.other_experience_years.errors, value=years, type="number", placeholder="years") }}
+            </div>
+            <div class="col">
+              {{ macros.input(label="Months", name="other_experience_months", errors=form.other_experience_months.errors, value=months, type="number", placeholder="months") }}
+            </div>
+          </div>  
+          {% endif %}
+
         {% endfor %}
+       
         <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update skill"/>
     </form>
     {% endfor %}
