@@ -109,7 +109,7 @@ def skills_delete(skill_id):
     db.session.delete(skill)
     db.session.commit()
 
-    return redirect(url_for("skills_form"))
+    return redirect(url_for("skills_my"))
 
 def __validate_experience(form):
     if form.work_experience_years.data == 0 and \
