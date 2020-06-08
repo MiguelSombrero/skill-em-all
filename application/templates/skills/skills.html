@@ -5,12 +5,12 @@
 
 {{ macros.banner("My skills") }}
 
-<div class="row">
+{% for skill in skills %}
+<div class="row mt-4">
   <div class="col form">
-    {% for skill in skills %}
-    <div class="row mt-4">
+    <div class="row">
       <div class="col">
-        <h3 class="mb-4" style="color: red;">{{ skill.name }}</h3>
+        <h2 class="mb-4" style="color: red;">{{ skill.name }}</h2>
       </div>
       <div class="col">
         <form method="POST" action="{{ url_for('skills_delete', skill_id=skill.id) }}">
@@ -50,9 +50,9 @@
 
         {% endfor %}
        
-        <input type="submit" class="btn btn-dark mb-4" style="width: 100%;" value="Update skill"/>
+        <input type="submit" class="btn btn-dark mb-4" style="width: 100%;" value="Update {{ skill.name }}"/>
     </form>
-    {% endfor %}
   </div>
 </div>
+{% endfor %}
 {% endblock %}

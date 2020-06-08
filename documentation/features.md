@@ -95,7 +95,7 @@ Account object is implicitly called with skills and experiences, when user loads
     WHERE Account.id = 'id'
     ORDER BY Experience.experience DESC
 
-## User can remove skills
+## User can update skill
 
 ### Queries
 
@@ -107,7 +107,17 @@ First skill is queried by id in order to check whether it is owned by logged use
     WHERE Skill.id = 'id'
     ORDER BY Experience.experience DESC
 
-If so, Skill and related experiences is deleted from db
+If it is, all experiences related to that skill is updated
+
+    UPDATE Experience
+    SET experience = 'experience'
+    WHERE Experience.skill_id = 'skill_id'
+
+## User can remove skills
+
+### Queries
+
+First skill is queried by id as in update skill user story. After that, skill and related experiences is deleted from db
 
     DELETE FROM skill
     WHERE skill.id = ?

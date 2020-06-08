@@ -37,29 +37,30 @@ def skills_create():
 
     skill = Skill.query.filter_by(name=form.name.data, owner_id=current_user.id).first()
         
-    if not skill:
-        skill = Skill(form.name.data)
-        skill.owner_id = current_user.id
-        db.session.add(skill)
-        db.session.commit()
+    if skill:
+        return render_template("skills/skills_form.html", form = form,
+            error = "You already have skill " + form.name.data)
+         
+    skill = Skill(form.name.data)
+    skill.owner_id = current_user.id
+    db.session.add(skill)
+    db.session.commit()
+    
+    work_experience = Experience("Work experience",
+        form.work_experience_years.data * 12 + form.work_experience_months.data
+    )
 
-        if form.work_experience_years.data > 0 or form.work_experience_months.data:
-            work_experience = Experience("Work experience",
-                form.work_experience_years.data * 12 + form.work_experience_months.data
-            )
+    work_experience.skill_id = skill.id
+    db.session.add(work_experience)
+    
+    other_experience = Experience("Other experience",
+        form.other_experience_years.data * 12 + form.other_experience_months.data
+    )
 
-            work_experience.skill_id = skill.id
-            db.session.add(work_experience)
-            db.session.commit()
-
-        if form.other_experience_years.data > 0 or form.other_experience_months.data:
-            other_experience = Experience("Other experience",
-                form.other_experience_years.data * 12 + form.other_experience_months.data
-            )
-
-            other_experience.skill_id = skill.id
-            db.session.add(other_experience)
-            db.session.commit()
+    other_experience.skill_id = skill.id
+    db.session.add(other_experience)
+    
+    db.session.commit()   
 
     return redirect(url_for("skills_form"))
 
@@ -80,21 +81,18 @@ def skills_update(skill_id):
         return render_template("skills/skills.html", form = form,
             error = "You must give an experience to skill")
 
-    if form.work_experience_years.data > 0 or form.work_experience_months.data:
-        experience = Experience.query\
-            .filter_by(skill_id=skill_id, experience_type="Work experience")\
-            .first()
-
-        experience.experience = form.work_experience_years.data * 12 + form.work_experience_months.data
-        db.session.commit()
-
-    if form.other_experience_years.data > 0 or form.other_experience_months.data:
-        experience = Experience.query\
-            .filter_by(skill_id=skill_id, experience_type="Other experience")\
-            .first()
+    work_experience = Experience.query\
+        .filter_by(skill_id=skill_id, experience_type="Work experience")\
+        .first()
+    
+    other_experience = Experience.query\
+        .filter_by(skill_id=skill_id, experience_type="Other experience")\
+        .first()
         
-        experience.experience = form.other_experience_years.data * 12 + form.other_experience_months.data
-        db.session.commit() 
+    work_experience.experience = form.work_experience_years.data * 12 + form.work_experience_months.data
+    other_experience.experience = form.other_experience_years.data * 12 + form.other_experience_months.data
+    
+    db.session.commit()     
 
     return redirect(url_for("skills_my"))
 

@@ -2,9 +2,10 @@
 {% import "macros.html" as macros %}
 
 {% block body %}
+{{ macros.banner("Login") }}
+
 <div class="row">
   <div class="col m-4">
-    <h2 class="text-center">Login</h2>
     <p class="text-center" style="color: red;">{{ error }}</p>
     <form method="POST" action="{{ url_for('login') }}" class="form">
       

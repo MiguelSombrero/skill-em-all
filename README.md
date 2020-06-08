@@ -12,7 +12,7 @@ Skill 'Em All is an application for finding right people for the projects based 
 
 - User can create an account
 - User can view and manage profile
-- User can add/remove skills
+- User can add/update/remove skills
 - User can search other users by skill
 - User can create/close projects
 - User can add other users to her/his projects
@@ -85,8 +85,7 @@ Commit and push your changes to heroku
 
 - exception handling in views
 - information if specific person is available (tied into another project or not)
-- possibility to update experience without deleting and adding skill
-- Add more information in My projects view
+- Add more information in My projects view:
     - To add information about staff, you need to modify find_projects_by_owner() query in Project model
-- In Find people view, do not show add project buttons which user already in
+- In Find people view, do not show 'add to project' buttons for projects user already in
 - ... and lots of minor bug fixes and betterments

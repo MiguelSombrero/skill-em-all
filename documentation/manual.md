@@ -18,9 +18,13 @@ User can view his/hers profile by clicking the link `Me -> My Profile` from navi
 
 User can delete account clicking `Delete account` button. This will also delete all skills and projects related to that profile.
 
-## View, add and delete skills
+## View and add skills
 
 User can view, add and delete skills by clicking the link `Add skills` from navigation bar and filling skill form. Skill can be any skill or knowledge, which you would use in your CV - for example 'Python' or 'Agile methods'. 
+
+## View, update and delete skills
+
+User can view, update and delete skills by clicking the link `Me -> My Skills` from navigation bar.  
 
 ## Create project
 

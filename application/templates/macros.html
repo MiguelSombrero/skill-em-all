@@ -23,7 +23,12 @@
     {% for experience in skill.experiences %}
       <tr>
         <th scope="row">{{ experience.experience_type }}</th>
-        <td>{{ (experience.experience / 12) | round(1) }} years</td>
+
+        {% if experience.experience > 0 %}
+          <td>{{ (experience.experience / 12) | round(1) }} years</td>
+        {% else %}
+          <td>No experience</td>
+        {% endif %}
       </tr>
     {% endfor%}
     </tbody>

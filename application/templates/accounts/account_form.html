@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
+
 {% block body %}
+{{ macros.banner("Register an account") }}
 
 <div class="row">
   <div class="col m-4">
-    <h2 class="text-center">Register an account</h2>
     <p class="text-center" style="color: red;">{{ error }}</p>
     <form method="POST" action="{{ url_for('accounts_create') }}" class="form">
 
