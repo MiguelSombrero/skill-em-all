@@ -6,16 +6,36 @@
 {{ macros.banner("My projects") }}
 
 <div class="row m-4">
-  <div class="col">
-    {% for project in projects if project %}
+  <div class="col main">
+    {% for project in projects if project.active %}
     <div class="card mb-3">
         <div class="card-header">
           <h2 class="card-title">{{ project.name }}</h2>
+          <a class="float-left" href="{{ url_for('projects_manage', project_id=project.id) }}">Manage project</a>
+          <p class="float-right" style="color: green;">Active</p>
         </div>
         <div class="card-body">
-            <a href="{{ url_for('projects_manage', project_id=project.id) }}">Manage project -></a>
+          <h5>Staff in this project</h5>
+          <ul class="list-group list-group-flush">
+            {% for employee in project.staff %}
+            <li class="list-group-item">{{ employee.name}}</li>
+            {% endfor %}
+
+            {% if project.staff | length == 0 %}
+            <li class="list-group-item">No staff yet</li>
+            {% endif %}
+          </ul>
         </div>
-      </div>
+    </div>  
+    {% endfor %}
+
+    {% for project in projects if not project.active %}
+    <div class="card mb-3">
+        <div class="card-header">
+          <h2 class="card-title text-muted">{{ project.name }}</h2>
+          <p class="float-right" style="color: red;">Closed</p>
+        </div>
+    </div>
     {% endfor %}
 
     {% if projects | length == 0 %}

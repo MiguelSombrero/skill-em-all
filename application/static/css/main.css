@@ -2,11 +2,15 @@
     background-color: red;
  }
  
- .form {
+ .form, .main {
     max-width: 25rem;
     margin: auto;
     padding: 1rem;
     background-color: antiquewhite;
+}
+
+.main {
+    max-width: 35rem;
 }
 
 h1 {
