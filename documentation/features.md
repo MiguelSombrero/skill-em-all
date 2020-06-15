@@ -52,7 +52,7 @@ Account is queried by id
 
     SELECT *
     FROM Account
-    WHERE id = 'id
+    WHERE id = 'id'
 
 Queried account is updated in the database
 
@@ -86,7 +86,7 @@ Also experiences related to this skill is saved to db. There can be more than on
 
 ### Queries
 
-Account object is implicitly called with skills and experiences, when user loads skills page
+Account object is called with skills and experiences, when user loads skills page
 
     SELECT *
     FROM Account
@@ -138,7 +138,6 @@ Current users active projects are fetched
     WHERE Project.owner_id = 'id'
     AND Project.active = 1
 
-
 Accounts are fetched by skill name
 
     SELECT *
@@ -167,13 +166,14 @@ Accounts are fetched by skill name
 
 ### Queries
 
-    SELECT Project.id, Project.name, Project.start_date, Project.end_date
+Projects are queried by owner id. Account and Account_project tables are joined to find projects staff
+
+    SELECT Project.*, Account.name
     FROM Project
     LEFT JOIN Account_project ON Project.id = Account_project.project_id
     LEFT JOIN Account ON Account.id = Account_project.account_id
     WHERE Project.owner_id = 'id'
-    AND Project.active = 1
-    GROUP BY Project.id
+    GROUP BY Project.id, Account.name
 
 ## User can add other users to projects he/she owns
 

@@ -1,7 +1,5 @@
 # Skill 'Em All
 
-**Under development**
-
 This is a course project for University of Helsinki course [Database application](https://materiaalit.github.io/tsoha-20/osa0/).
 
 ## Abstract
@@ -11,11 +9,12 @@ Skill 'Em All is an application for finding right people for the projects based 
 ### Main features
 
 - User can create an account
+- User can login/logout
 - User can view and manage profile
 - User can add/update/remove skills
 - User can search other users by skill
 - User can create/close projects
-- User can add other users to her/his projects
+- User can add users to her/his projects
 
 ## Skill 'Em All live
 
@@ -31,10 +30,9 @@ Latest build of this app is running on Heroku:
 
 - [Manual](https://github.com/MiguelSombrero/skill-em-all/tree/master/documentation/manual.md)
 
-
 ## Application requirements
 
-Application requires python3 to run
+You need to have `python` installed in order to run the app
 
 ## Install and run application locally
 
@@ -83,9 +81,7 @@ Commit and push your changes to heroku
 
 ## TODO
 
-- exception handling in views
-- information if specific person is available (tied into another project or not)
-- Add more information in My projects view:
-    - To add information about staff, you need to modify find_projects_by_owner() query in Project model
-- In Find people view, do not show 'add to project' buttons for projects user already in
+- exception handling
+- information if specific person is tied into another project
+- in Find people view, do not show 'add to project' buttons for projects user already in
 - ... and lots of minor bug fixes and betterments

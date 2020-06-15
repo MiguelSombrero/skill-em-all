@@ -24,32 +24,29 @@
 
 {% for account in accounts %}
 <div class="row">
-    <div class="col">
-        <h3 style="width: 100%; text-align: center;">{{ account.name }}</h3>
-    </div>
-</div>
-<div class="row m-4" style="background-color: red;">
-    <div class="col-12 col-md-6 p-3">
-        <div class="card mb-3">
+    <div class="col main">
+        <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Add {{ account.name }} to one of your projects</h5>
+                <h2 class="card-title">{{ account.name }}</h2>
+                <h6 class="card-subtitle text-muted mt-2">{{ account.profile_info or "" }}</h6>
             </div>
             <div class="card-body">
-                {% for project in projects %}
-                <form class="my-2 my-lg-0 p-1 justify-content-center" method="POST" action="{{ url_for('projects_add_staff', project_id=project.id, account_id=account.id) }}" class="form">
-                    <input type="submit" class="btn btn-dark my-2 my-sm-0" style="width: 100%;" value="{{ project.name }}"/>
-                </form>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-md-6 p-3">
-        <div class="card mb-3">
-            <div class="card-header">
-                <h5 class="card-title">Skills</h5>
-            </div>
-            <div class="card-body table-responsive">
-                {{ macros.skill_table(account.skills) }}
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h3 class="card-title text-center">Skills</h3>
+                        <div class="card-body table-responsive">
+                            {{ macros.skill_table(account.skills) }}
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h3 class="card-title text-center">Add to project</h3>
+                        {% for project in projects %}
+                        <form class="my-2 my-lg-0 p-1 justify-content-center" method="POST" action="{{ url_for('projects_add_staff', project_id=project.id, account_id=account.id) }}" class="form">
+                            <input type="submit" class="btn btn-danger" style="width: 100%;" value="{{ project.name }}"/>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
