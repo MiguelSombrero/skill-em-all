@@ -19,12 +19,18 @@ class Project(Base, UserResource):
     @staticmethod
     def find_projects_by_owner(owner_id):
         statement = text(
-            "SELECT Project.*, Account.name"
-            " FROM Project"
-            " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
-            " LEFT JOIN Account ON Account.id = Account_project.account_id"
-            " WHERE Project.owner_id = :owner_id"
-            " GROUP BY Project.id, Account.name"
+            "SELECT a.id, a.name, a.start_date, a.end_date, a.active, a.account_name, b.staff_count"
+            " FROM"
+            " (SELECT Project.*, Account.name AS account_name"
+                " FROM Project"
+                " LEFT JOIN Account_project ON Project.id = Account_project.project_id"
+                " LEFT JOIN Account ON Account.id = Account_project.account_id"
+                " WHERE Project.owner_id = :owner_id"
+                " GROUP BY Project.id, Account.name) a"
+            " LEFT JOIN"
+            " (SELECT project_id AS id, COUNT(*) AS staff_count"
+            " FROM Account_project"
+            " GROUP BY project_id) b ON a.id = b.id"
         ).params(owner_id=owner_id)
 
         res = db.engine.execute(statement)
@@ -32,11 +38,12 @@ class Project(Base, UserResource):
 
         for row in res:
             id = row[0]
-            name = row[2]
-            start_date = row[3]
-            end_date = row[4]
-            active = row[5]
-            staff_name = row[7]
+            name = row[1]
+            start_date = row[2]
+            end_date = row[3]
+            active = row[4]
+            staff_name = row[5]
+            staff_count = row[6]
 
             isInList = False
 
@@ -58,6 +65,7 @@ class Project(Base, UserResource):
                     "start_date": start_date,
                     "end_date": end_date,
                     "active": active,
+                    "staff_count": staff_count,
                     "staff": []
                 }
 

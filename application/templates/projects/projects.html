@@ -15,14 +15,15 @@
           <p class="float-right" style="color: green;">Active</p>
         </div>
         <div class="card-body">
-          <h5>Staff in this project</h5>
-          <ul class="list-group list-group-flush">
-            {% for employee in project.staff %}
-            <li class="list-group-item">{{ employee.name}}</li>
-            {% endfor %}
-
             {% if project.staff | length == 0 %}
-            <li class="list-group-item">No staff yet</li>
+            <h5>No staff yet</h5>
+            {% else %}
+            <h5>{{ project.staff_count }} persons in this project:</h5>
+            <ul class="list-group list-group-flush">
+            {% for employee in project.staff %}
+              <li class="list-group-item">{{ employee.name}}</li>
+            {% endfor %}
+            </ul>
             {% endif %}
           </ul>
         </div>
