@@ -14,6 +14,18 @@
     <h5>Description</h5>
     <p>{{ account.profile_info or 'No description' }}</p>
 
+    {% if current_user.id == account.id %}
+    <h2>Update your profile</h2>
+    <form method="POST" action="{{ url_for('accounts_update', account_id=current_user.id) }}" class="form">
+
+      {{ macros.input(form.name.label, "name", form.name.errors, form.name.data) }}
+      {{ macros.input(form.password.label, "password", form.password.errors, type="password", placeholder="give new password in order to change") }}
+      {{ macros.input(form.email.label, "email", form.email.errors, form.email.data or '') }}
+      {{ macros.input(form.profile_info.label, "profile_info", form.profile_info.errors, form.profile_info.data or '' ) }}
+
+      <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update account"/>
+    </form>
+
     <div class="card mt-4">
       <div class="card-header text-center">
         Danger zone
@@ -24,18 +36,13 @@
         </form>
       </div>
     </div>
+    {% endif %}
   </div>
   <div class="col-12 col-md-8">
-    <h2 class="text-center">Update your profile</h2>
-    <form method="POST" action="{{ url_for('accounts_update', account_id=current_user.id) }}" class="form">
-
-      {{ macros.input(form.name.label, "name", form.name.errors, form.name.data) }}
-      {{ macros.input(form.password.label, "password", form.password.errors, type="password", placeholder="give new password in order to change") }}
-      {{ macros.input(form.email.label, "email", form.email.errors, form.email.data or '') }}
-      {{ macros.input(form.profile_info.label, "profile_info", form.profile_info.errors, form.profile_info.data or '' ) }}
-
-      <input type="submit" class="btn btn-dark" style="width: 100%;" value="Update account"/>
-    </form>
-  </div>
+    <h2 class="card-title">Skills</h2>
+    <div class="card-body table-responsive">
+        {{ macros.skill_table(account.skills) }}
+    </div>
+</div>
 </div>
 {% endblock %}

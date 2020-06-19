@@ -16,9 +16,6 @@ def accounts_form():
 @app.route("/accounts/<account_id>", methods=["GET"])
 @login_required
 def accounts_profile(account_id):
-    if not __is_owner(account_id):
-        return login_manager.unauthorized()
-
     account = Account.query.get(account_id)
     form = AccountForm(obj=account)
     

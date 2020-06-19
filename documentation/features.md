@@ -166,14 +166,20 @@ Accounts are fetched by skill name
 
 ### Queries
 
-Projects are queried by owner id. Account and Account_project tables are joined to find projects staff
+Projects are queried by owner id. Account and Account_project tables are joined to find projects staff and staff count
 
-    SELECT Project.*, Account.name
-    FROM Project
-    LEFT JOIN Account_project ON Project.id = Account_project.project_id
-    LEFT JOIN Account ON Account.id = Account_project.account_id
-    WHERE Project.owner_id = 'id'
-    GROUP BY Project.id, Account.name
+    SELECT a.id, a.name, a.start_date, a.end_date, a.active, a.account_name, b.staff_count
+    FROM (
+        SELECT Project.*, Account.name AS account_name
+        FROM Project
+        LEFT JOIN Account_project ON Project.id = Account_project.project_id
+        LEFT JOIN Account ON Account.id = Account_project.account_id
+        WHERE Project.owner_id = ?
+        GROUP BY Project.id, Account.name) a
+        LEFT JOIN (
+            SELECT project_id AS id, COUNT(*) AS staff_count
+            FROM Account_project
+            GROUP BY project_id) b ON a.id = b.id
 
 ## User can add other users to projects he/she owns
 

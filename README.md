@@ -82,6 +82,7 @@ Commit and push your changes to heroku
 ## TODO
 
 - exception handling
-- information if specific person is tied into another project
-- in Find people view, do not show 'add to project' buttons for projects user already in
+- paging in Find people view
+- information if specific person is available (or tied into another project)
+- do not show 'add to project' buttons in Find people view for projects user already in
 - ... and lots of minor bug fixes and betterments
