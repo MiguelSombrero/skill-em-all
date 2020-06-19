@@ -24,6 +24,10 @@ def projects_my():
 @login_required
 def projects_manage(project_id):
     project = Project.query.get(project_id)
+    
+    if not project.is_owned_by(current_user.id):
+        return login_manager.unauthorized()
+
     project_skills = Skill.find_skills_by_project(project_id)
     
     return render_template("projects/project.html",
