@@ -75,11 +75,17 @@ def skills_update(skill_id):
     form = SkillForm(request.form)
 
     if not form.validate():
-        return render_template("skills/skills.html", form = form)
+        return render_template("skills/skills.html",
+            form = form,
+            skills = Skill.query.filter_by(owner_id=current_user.id)
+        )
 
     if not __validate_experience(form):
-        return render_template("skills/skills.html", form = form,
-            error = "You must give an experience to skill")
+        return render_template("skills/skills.html",
+            form = form,
+            skills = Skill.query.filter_by(owner_id=current_user.id),
+            error = "You must give an experience to skill"
+        )
 
     work_experience = Experience.query\
         .filter_by(skill_id=skill_id, experience_type="Work experience")\

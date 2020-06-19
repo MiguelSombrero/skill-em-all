@@ -4,7 +4,7 @@
     <input id="{{ name }}" class="form-control" type="{{ type }}" value="{{ value }}" name="{{ name }}" placeholder="{{ placeholder }}" >
     
     {% for error in errors %}
-      <small class="form-text text-muted">{{ error }}</small>
+      <small class="form-text" style="color: red;">{{ error }}</small>
     {% endfor %}
   </div>
 {%- endmacro %}
